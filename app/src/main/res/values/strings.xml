@@ -6,4 +6,5 @@
     <string name="dollar_holding_placeholder">1 000$</string>
     <string name="coin_holdings_placeholder">0.01 BTC</string>
     <string name="no_data_loaded">No data loaded</string>
+    <string name="search_coin_activity_title">Add new coins</string>
 </resources>

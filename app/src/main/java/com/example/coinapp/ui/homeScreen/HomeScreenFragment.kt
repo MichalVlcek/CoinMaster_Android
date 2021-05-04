@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coinapp.AddCoinActivity
 import com.example.coinapp.MainActivity
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
@@ -57,7 +58,7 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun openAddCoinActivity() {
-        val intent = Intent(context, MainActivity()::class.java)
+        val intent = Intent(context, AddCoinActivity()::class.java)
         startActivity(intent)
     }
 

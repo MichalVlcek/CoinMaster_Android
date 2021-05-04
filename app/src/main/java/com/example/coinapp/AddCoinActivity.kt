@@ -3,9 +3,9 @@ package com.example.coinapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class AddCoinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // At the moment doesn't do anything
+        setContentView(R.layout.add_coin_fragment)
     }
 }

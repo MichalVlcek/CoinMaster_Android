@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinApp">
-        <activity android:name=".SearchCoinActivity"
+        <activity android:name=".AddCoinActivity"
             android:parentActivityName=".HomeScreenActivity"
             android:label="@string/search_coin_activity_title">
 
