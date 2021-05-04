@@ -6,7 +6,7 @@ import android.widget.ViewSwitcher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
-import com.example.coinapp.databinding.WatchedCoinItemBinding
+import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
 
 class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick: (Coin) -> Unit) :
     RecyclerView.Adapter<HomeScreenAdapter.ViewHolder>() {
@@ -24,7 +24,7 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
             }
         }
 
-    class ViewHolder(itemBinding: WatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
+    class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val name = itemBinding.coinName
         private val price = itemBinding.coinPrice
@@ -39,7 +39,7 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            WatchedCoinItemBinding.inflate(
+            HomeWatchedCoinItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
