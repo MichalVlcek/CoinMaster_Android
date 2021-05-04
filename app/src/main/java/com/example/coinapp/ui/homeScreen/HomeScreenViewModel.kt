@@ -1,4 +1,4 @@
-package com.example.coinapp.homeScreen
+package com.example.coinapp.ui.homeScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

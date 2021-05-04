@@ -1,4 +1,4 @@
-package com.example.coinapp.homeScreen
+package com.example.coinapp.ui.homeScreen
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider

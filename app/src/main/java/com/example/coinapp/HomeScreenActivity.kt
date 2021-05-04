@@ -2,7 +2,7 @@ package com.example.coinapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.coinapp.homeScreen.HomeScreenFragment
+import com.example.coinapp.ui.homeScreen.HomeScreenFragment
 
 class HomeScreenActivity : AppCompatActivity() {
 
