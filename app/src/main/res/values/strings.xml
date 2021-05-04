@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">CoinApp</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_home_screen">CoinApp</string>
     <string name="coin_name_placeholder">COIN</string>
     <string name="price_placeholder">60 000$</string>
     <string name="dollar_holding_placeholder">1 000$</string>
     <string name="coin_holdings_placeholder">0.01 BTC</string>
+    <string name="no_data_loaded">No data loaded</string>
 </resources>

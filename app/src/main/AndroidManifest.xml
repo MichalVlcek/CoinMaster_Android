@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinApp">
         <activity
-            android:name=".HomeScreen"
+            android:name=".HomeScreenActivity"
             android:label="@string/title_activity_home_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
-            android:parentActivityName=".HomeScreen">
+            android:parentActivityName=".HomeScreenActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
