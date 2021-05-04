@@ -7,22 +7,22 @@ import com.example.coinapp.data.Coin
 
 class HomeScreenViewModel : ViewModel() {
     private val _items = MutableLiveData<List<Coin>>().apply { value = listOf(
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
-        Coin("BTC", 50000),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
+        Coin("BTC", 50000.0),
     ) }
 
     val items: LiveData<List<Coin>>

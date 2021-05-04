@@ -55,10 +55,15 @@ class AddCoinFragment : Fragment() {
                 listAdapter.coins = it
             }
         )
+
+        binding.button.setOnClickListener { refreshData() }
     }
 
     private fun adapterOnClick(coin: Coin) {
+    }
 
+    private fun refreshData() {
+        viewModel.fetchData()
     }
 
     override fun onDestroyView() {
