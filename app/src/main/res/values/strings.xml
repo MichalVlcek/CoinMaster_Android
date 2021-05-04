@@ -10,4 +10,6 @@
     <string name="added_coins_placeholder">Currently added: 8/10</string>
     <string name="user_type_placeholder">You are Premium User</string>
     <string name="search">Search</string>
+    <string name="rank_placeholder">#1</string>
+    <string name="market_cap_placeholder">1 000 000 000$</string>
 </resources>
