@@ -7,4 +7,7 @@
     <string name="coin_holdings_placeholder">0.01 BTC</string>
     <string name="no_data_loaded">No data loaded</string>
     <string name="search_coin_activity_title">Add new coins</string>
+    <string name="added_coins_placeholder">Currently added: 8/10</string>
+    <string name="user_type_placeholder">You are Premium User</string>
+    <string name="search">Search</string>
 </resources>
