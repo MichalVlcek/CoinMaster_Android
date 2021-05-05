@@ -56,6 +56,7 @@ class AddCoinFragment : Fragment() {
             }
         )
 
+        refreshData()
         binding.button.setOnClickListener { refreshData() }
     }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.coinapp.data.Coin
 import drewcarlson.coingecko.CoinGeckoClient
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AddCoinViewModel : ViewModel() {
     private val _items = MutableLiveData<List<Coin>>().apply {
@@ -24,7 +25,15 @@ class AddCoinViewModel : ViewModel() {
                 vsCurrency = "usd",
                 perPage = 250,
                 page = 1
-            ).markets.map { market -> Coin(market.name ?: "", market.currentPrice) }
+            ).markets.map { market ->
+                Coin(
+                    icon = market.image ?: "",
+                    rank = market.marketCapRank.toInt(),
+                    name = market.symbol?.toUpperCase(Locale.getDefault()) ?: "",
+                    price = market.currentPrice,
+                    marketCap = market.marketCap
+                )
+            }
 
             _items.postValue(temp)
         }

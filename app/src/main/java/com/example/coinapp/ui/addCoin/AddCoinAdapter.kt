@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ViewSwitcher
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
-import com.example.coinapp.databinding.AddCoinFragmentBinding
 import com.example.coinapp.databinding.AddCoinItemBinding
-import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
 
 class AddCoinAdapter(private val switcher: ViewSwitcher, private val onClick: (Coin) -> Unit) :
     RecyclerView.Adapter<AddCoinAdapter.ViewHolder>() {
@@ -28,12 +27,18 @@ class AddCoinAdapter(private val switcher: ViewSwitcher, private val onClick: (C
 
     class ViewHolder(itemBinding: AddCoinItemBinding, val onClick: (Coin) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
+        private val icon = itemBinding.coinIcon
+        private val rank = itemBinding.coinRank
         private val name = itemBinding.coinName
         private val price = itemBinding.coinPrice
+        private val marketCap = itemBinding.coinCap
 
         fun bind(coin: Coin) {
+            icon.load(coin.icon)
+            rank.text = "#${coin.rank}"
             name.text = coin.name
-            price.text = coin.price.toString()
+            price.text = "${coin.price}$"
+            marketCap.text = "${coin.marketCap.toBigDecimal().toPlainString()}$"
 
             itemView.setOnClickListener { onClick(coin) }
         }
