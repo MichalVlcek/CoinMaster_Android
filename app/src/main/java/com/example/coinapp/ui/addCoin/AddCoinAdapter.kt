@@ -17,7 +17,7 @@ class AddCoinAdapter(private val switcher: ViewSwitcher, private val onClick: (C
             field = value
             notifyDataSetChanged()
             if (value.isEmpty()) {
-                if (switcher.currentView.id != R.id.empty) {
+                if (switcher.currentView.id != R.id.loadingBar) {
                     switcher.showNext()
                 }
             } else if (switcher.currentView.id != R.id.watchedCoinsList) {

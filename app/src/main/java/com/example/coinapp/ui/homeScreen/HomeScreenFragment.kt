@@ -57,6 +57,12 @@ class HomeScreenFragment : Fragment() {
         binding.fab.setOnClickListener { openAddCoinActivity() }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.updateData()
+    }
+
     private fun openAddCoinActivity() {
         val intent = Intent(context, AddCoinActivity()::class.java)
         startActivity(intent)
