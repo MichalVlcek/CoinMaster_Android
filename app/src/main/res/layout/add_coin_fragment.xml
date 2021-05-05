@@ -39,8 +39,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
 
-    <ViewSwitcher
-        android:id="@+id/switcher"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,21 +48,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
 
-        <TextView
-            android:id="@+id/empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/no_data_loaded"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/watchedCoinsList"
+        <ViewSwitcher
+            android:id="@+id/switcher"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent">
 
-    </ViewSwitcher>
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_data_loaded"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/watchedCoinsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </ViewSwitcher>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/button"

@@ -38,4 +38,8 @@ class AddCoinViewModel : ViewModel() {
             _items.postValue(temp)
         }
     }
+
+    fun clearItems() {
+        _items.value = emptyList()
+    }
 }

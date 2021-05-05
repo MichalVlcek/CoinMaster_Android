@@ -8,12 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.AddCoinFragmentBinding
-import com.example.coinapp.databinding.HomeScreenFragmentBinding
-import com.example.coinapp.ui.homeScreen.HomeScreenAdapter
-import com.example.coinapp.ui.homeScreen.HomeScreenViewModel
 
 class AddCoinFragment : Fragment() {
 
@@ -47,6 +43,13 @@ class AddCoinFragment : Fragment() {
         binding.watchedCoinsList.apply {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             adapter = listAdapter
+        }
+
+        val swipeContainer = binding.swipeContainer
+        binding.swipeContainer.setOnRefreshListener {
+            viewModel.clearItems()
+            refreshData()
+            swipeContainer.isRefreshing = false // TODO animation disappears immediately: FIX
         }
 
         viewModel.items.observe(

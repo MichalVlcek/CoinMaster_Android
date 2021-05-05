@@ -33,6 +33,7 @@ class AddCoinAdapter(private val switcher: ViewSwitcher, private val onClick: (C
         private val price = itemBinding.coinPrice
         private val marketCap = itemBinding.coinCap
 
+        //TODO Change the string implementation
         fun bind(coin: Coin) {
             icon.load(coin.icon)
             rank.text = "#${coin.rank}"
