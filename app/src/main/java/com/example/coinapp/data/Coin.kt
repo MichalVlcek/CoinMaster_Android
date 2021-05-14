@@ -10,4 +10,5 @@ data class Coin(
     val name: String,
     var price: Double,
     var marketCap: Double,
+    var supply: Double
 ) : Parcelable

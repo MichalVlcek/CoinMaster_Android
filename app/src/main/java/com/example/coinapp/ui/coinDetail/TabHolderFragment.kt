@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.data.Coin
@@ -49,7 +50,11 @@ class TabHolderFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pagerAdapter = SectionsPagerAdapter(this, coin!!)
+        val viewModel = ViewModelProvider(requireActivity()).get(PageViewModel::class.java)
+
+        viewModel.setCoin(coin!!)
+
+        pagerAdapter = SectionsPagerAdapter(this)
 
         viewPager = binding.viewPager
 

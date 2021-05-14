@@ -2,17 +2,17 @@ package com.example.coinapp.ui.coinDetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.coinapp.data.Coin
 
 class PageViewModel : ViewModel() {
 
-    private val _index = MutableLiveData<Int>()
-    val text: LiveData<String> = Transformations.map(_index) {
-        "Hello world from section: $it"
-    }
+    private val _coin = MutableLiveData<Coin>()
 
-    fun setIndex(index: Int) {
-        _index.value = index
+    val coin: LiveData<Coin>
+        get() = _coin
+
+    fun setCoin(newCoin: Coin) {
+        _coin.value = newCoin
     }
 }
