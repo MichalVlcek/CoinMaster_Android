@@ -12,4 +12,19 @@
     <string name="search">Search</string>
     <string name="rank_placeholder">#1</string>
     <string name="market_cap_placeholder">1 000 000 000$</string>
+    <string name="title_activity_coin_detail">CoinDetailActivity</string>
+    <string name="coin_info">Coin Info</string>
+    <string name="transactions">Transactions</string>
+    <!-- COIN INFO STRINGS -->
+    <string name="holdings">Holdings:</string>
+    <string name="zero">0</string>
+    <string name="average_buy_price">Average Buy Price:</string>
+    <string name="percentage_change">Percentage Change:</string>
+    <string name="rank">Rank:</string>
+    <string name="current_price">Current Price:</string>
+    <string name="holdings_value">Holdings Value:</string>
+    <string name="current_deposit">Current Deposit:</string>
+    <string name="profit_loss">Profit / Loss:</string>
+    <string name="market_cap">Market Cap:</string>
+    <string name="circulating_supply">Circulating Supply:</string>
 </resources>

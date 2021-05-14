@@ -29,9 +29,10 @@ class AddCoinViewModel : ViewModel() {
                 Coin(
                     icon = market.image ?: "",
                     rank = market.marketCapRank.toInt(),
-                    name = market.symbol?.toUpperCase(Locale.getDefault()) ?: "",
+                    name = market.symbol?.uppercase(Locale.getDefault()) ?: "",
                     price = market.currentPrice,
-                    marketCap = market.marketCap
+                    marketCap = market.marketCap,
+                    supply = market.circulatingSupply
                 )
             }
 

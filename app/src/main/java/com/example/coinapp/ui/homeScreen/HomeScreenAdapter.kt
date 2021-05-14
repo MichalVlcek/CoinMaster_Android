@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ViewSwitcher
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
@@ -16,7 +17,7 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
             field = value
             notifyDataSetChanged()
             if (value.isEmpty()) {
-                if (switcher.currentView.id != R.id.empty) {
+                if (switcher.currentView.id != R.id.loadingBar) {
                     switcher.showNext()
                 }
             } else if (switcher.currentView.id != R.id.watchedCoinsList) {
@@ -26,12 +27,14 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
 
     class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
+        private val icon = itemBinding.coinIcon
         private val name = itemBinding.coinName
         private val price = itemBinding.coinPrice
 
         fun bind(coin: Coin) {
+            icon.load(coin.icon)
             name.text = coin.name
-            price.text = coin.price.toString()
+            price.text = "${coin.price}$"
 
             itemView.setOnClickListener { onClick(coin) }
         }

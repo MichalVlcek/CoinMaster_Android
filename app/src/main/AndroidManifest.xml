@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinApp">
-        <activity android:name=".AddCoinActivity"
-            android:parentActivityName=".HomeScreenActivity"
-            android:label="@string/search_coin_activity_title">
-
-        </activity>
+        <activity
+            android:name=".CoinDetailActivity"
+            android:label="@string/title_activity_coin_detail"
+            android:parentActivityName=".HomeScreenActivity" />
+        <activity
+            android:name=".AddCoinActivity"
+            android:label="@string/search_coin_activity_title"
+            android:parentActivityName=".HomeScreenActivity" />
         <activity
             android:name=".HomeScreenActivity"
             android:label="@string/title_activity_home_screen">
@@ -27,15 +30,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".HomeScreenActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+            android:parentActivityName=".HomeScreenActivity" />
     </application>
 
 </manifest>

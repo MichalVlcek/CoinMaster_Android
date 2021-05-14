@@ -53,15 +53,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/empty"
+            <ProgressBar
+                android:id="@+id/loadingBar"
+                style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/no_data_loaded"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
+                android:layout_marginTop="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/watchedCoinsList"
@@ -70,15 +68,5 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </ViewSwitcher>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TMP BUTTON"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

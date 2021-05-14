@@ -1,14 +1,16 @@
 package com.example.coinapp.ui.addCoin
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NavUtils
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.data.Coin
+import com.example.coinapp.data.CoinList
 import com.example.coinapp.databinding.AddCoinFragmentBinding
 
 class AddCoinFragment : Fragment() {
@@ -60,10 +62,11 @@ class AddCoinFragment : Fragment() {
         )
 
         refreshData()
-        binding.button.setOnClickListener { refreshData() }
     }
 
     private fun adapterOnClick(coin: Coin) {
+        CoinList.coins.add(coin) //TODO update this by using database
+        NavUtils.navigateUpFromSameTask(this.requireActivity())
     }
 
     private fun refreshData() {
