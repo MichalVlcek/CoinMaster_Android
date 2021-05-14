@@ -13,6 +13,8 @@ import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class InfoFragment : Fragment() {
 
+    private lateinit var viewModel: CoinDetailViewModel
+
     private var _binding: CoinDetailInfoFragmentBinding? = null
     private val binding
         get() = _binding!!
@@ -27,7 +29,7 @@ class InfoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
         viewModel.coin.observe(
             viewLifecycleOwner,

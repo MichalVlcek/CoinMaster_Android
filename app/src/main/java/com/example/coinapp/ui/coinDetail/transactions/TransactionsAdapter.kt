@@ -12,7 +12,7 @@ import com.example.coinapp.helper.StringOperations
 
 class TransactionsAdapter(
     private val switcher: ViewSwitcher,
-    private val coin: Coin,
+    private val coin: Coin?,
     private val onClick: (Transaction) -> Unit
 ) : RecyclerView.Adapter<TransactionsAdapter.ViewHolder>() {
 
@@ -31,7 +31,7 @@ class TransactionsAdapter(
 
     class ViewHolder(
         itemBinding: TransactionsItemBinding,
-        val coin: Coin,
+        val coin: Coin?,
         val onClick: (Transaction) -> Unit
     ) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -44,7 +44,7 @@ class TransactionsAdapter(
             type.text = transaction.type.toString()
             date.text = transaction.date.toString()
             cost.text = StringOperations.formatCurrency(transaction.cost)
-            amount.text = StringOperations.formatCurrency(transaction.amount, coin)
+            amount.text = coin?.let { StringOperations.formatCurrency(transaction.amount, it) }
 
             itemView.setOnClickListener { onClick(transaction) }
         }

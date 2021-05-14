@@ -26,6 +26,8 @@ class CoinDetailFragment : Fragment() {
 
     private var coin: Coin? = null
 
+    private lateinit var viewModel: CoinDetailViewModel
+
     private lateinit var pagerAdapter: SectionsPagerAdapter
     private lateinit var viewPager: ViewPager2
 
@@ -51,7 +53,7 @@ class CoinDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
         viewModel.setCoin(coin!!)
 
