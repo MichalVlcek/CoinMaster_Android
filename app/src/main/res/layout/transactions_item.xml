@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<androidx.gridlayout.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/transaction_item"
+    android:layout_width="match_parent"
+    android:layout_height="?listPreferredItemHeight"
+    android:layout_centerHorizontal="true"
+    grid:alignmentMode="alignBounds"
+    grid:columnCount="4"
+    grid:rowCount="1"
+    grid:rowOrderPreserved="false"
+    grid:useDefaultMargins="true">
+
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/type_placeholder"
+        android:textColor="@android:color/holo_green_dark"
+        grid:layout_columnWeight="2"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/date_placeholder"
+        grid:layout_columnWeight="4"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/price_placeholder"
+        grid:layout_columnWeight="5"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/amount_placeholder"
+        grid:layout_columnWeight="5"
+        grid:layout_gravity="fill_horizontal" />
+</androidx.gridlayout.widget.GridLayout>

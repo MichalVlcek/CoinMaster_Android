@@ -27,4 +27,8 @@
     <string name="profit_loss">Profit / Loss:</string>
     <string name="market_cap">Market Cap:</string>
     <string name="circulating_supply">Circulating Supply:</string>
+    <string name="type_placeholder">SEND</string>
+    <string name="date_placeholder">03.04.2021</string>
+    <string name="amount_placeholder">0.000005 BTC</string>
+    <string name="add_transaction">Add Transaction</string>
 </resources>
