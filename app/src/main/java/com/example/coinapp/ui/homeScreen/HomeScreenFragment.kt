@@ -10,7 +10,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.AddCoinActivity
-import com.example.coinapp.MainActivity
+import com.example.coinapp.CoinDetailActivity
+import com.example.coinapp.CoinDetailActivity.Companion.COIN
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
 
@@ -69,7 +70,9 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun adapterOnClick(coin: Coin) {
-
+        val intent = Intent(context, CoinDetailActivity::class.java)
+        intent.putExtra(COIN, coin)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
