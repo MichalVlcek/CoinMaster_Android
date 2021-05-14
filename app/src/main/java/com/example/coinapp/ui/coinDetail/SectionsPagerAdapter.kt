@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.coinapp.R
 import com.example.coinapp.ui.coinDetail.info.InfoFragment
-import com.example.coinapp.ui.coinDetail.transactions.TransactionFragment
+import com.example.coinapp.ui.coinDetail.transactions.TransactionsFragment
 
 val TAB_TITLES = arrayOf(
     R.string.coin_info,
@@ -22,7 +22,7 @@ class SectionsPagerAdapter(fragment: Fragment) :
 
     private val fragments = arrayOf(
         InfoFragment(),
-        TransactionFragment()
+        TransactionsFragment()
     )
 
     override fun getItemCount(): Int = fragments.size

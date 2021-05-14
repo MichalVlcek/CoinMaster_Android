@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.databinding.CoinDetailTransactionFragmentBinding
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
-class TransactionFragment : Fragment() {
+class TransactionsFragment : Fragment() {
 
     private var _binding: CoinDetailTransactionFragmentBinding? = null
     private val binding
