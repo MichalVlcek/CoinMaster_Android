@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.coinapp.databinding.CoinDetailTransactionFragmentBinding
+import com.example.coinapp.databinding.TransactionsFragmentBinding
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class TransactionsFragment : Fragment() {
 
-    private var _binding: CoinDetailTransactionFragmentBinding? = null
+    private var _binding: TransactionsFragmentBinding? = null
     private val binding
         get() = _binding!!
 
@@ -19,7 +19,7 @@ class TransactionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CoinDetailTransactionFragmentBinding.inflate(inflater, container, false)
+        _binding = TransactionsFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

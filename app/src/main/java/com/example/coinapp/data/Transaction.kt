@@ -8,6 +8,6 @@ import java.util.*
 data class Transaction(
     val type: TransactionType,
     val date: Date,
-    val price: Double,
+    val cost: Double,
     val amount: Double
 ) : Parcelable
