@@ -1,4 +1,4 @@
-package com.example.coinapp.ui.coinDetail
+package com.example.coinapp.ui.coinDetail.transactions
 
 import android.os.Bundle
 import android.view.LayoutInflater

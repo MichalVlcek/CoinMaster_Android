@@ -3,6 +3,8 @@ package com.example.coinapp.ui.coinDetail
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.coinapp.R
+import com.example.coinapp.ui.coinDetail.info.InfoFragment
+import com.example.coinapp.ui.coinDetail.transactions.TransactionFragment
 
 val TAB_TITLES = arrayOf(
     R.string.coin_info,
