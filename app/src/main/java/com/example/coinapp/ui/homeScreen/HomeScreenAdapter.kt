@@ -29,12 +29,12 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
     class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val icon = itemBinding.coinIcon
-        private val name = itemBinding.coinName
+        private val symbol = itemBinding.coinSymbol
         private val price = itemBinding.coinPrice
 
         fun bind(coin: Coin) {
             icon.load(coin.icon)
-            name.text = coin.name
+            symbol.text = coin.symbol
             price.text = StringOperations.formatCurrency(coin.price)
 
             itemView.setOnClickListener { onClick(coin) }

@@ -46,6 +46,7 @@ class CoinDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = CoinDetailTabHolderFragmentBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 

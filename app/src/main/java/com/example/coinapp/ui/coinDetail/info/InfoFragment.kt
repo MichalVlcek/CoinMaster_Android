@@ -10,7 +10,6 @@ import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
 import com.example.coinapp.helper.StringOperations
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
-import java.text.NumberFormat
 
 class InfoFragment : Fragment() {
 
@@ -43,7 +42,7 @@ class InfoFragment : Fragment() {
             binding.rank.text = "#${it.rank}"
             binding.price.text = StringOperations.formatCurrency(it.price)
             binding.marketCap.text = StringOperations.formatCurrency(it.marketCap)
-            binding.supply.text = NumberFormat.getInstance().format(it.supply)
+            binding.supply.text = StringOperations.formatCurrency(coin.supply, coin)
         }
     }
 }

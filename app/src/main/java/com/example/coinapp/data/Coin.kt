@@ -8,6 +8,7 @@ data class Coin(
     val icon: String,
     val rank: Int,
     val name: String,
+    val symbol: String,
     var price: Double,
     var marketCap: Double,
     var supply: Double

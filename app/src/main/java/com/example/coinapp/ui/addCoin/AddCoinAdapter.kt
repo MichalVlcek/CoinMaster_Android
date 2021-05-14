@@ -32,7 +32,7 @@ class AddCoinAdapter(
         RecyclerView.ViewHolder(itemBinding.root) {
         private val icon = itemBinding.coinIcon
         private val rank = itemBinding.coinRank
-        private val name = itemBinding.coinName
+        private val symbol = itemBinding.coinSymbol
         private val price = itemBinding.coinPrice
         private val marketCap = itemBinding.coinCap
 
@@ -40,7 +40,7 @@ class AddCoinAdapter(
         fun bind(coin: Coin) {
             icon.load(coin.icon)
             rank.text = "#${coin.rank}"
-            name.text = coin.name
+            symbol.text = coin.symbol
             price.text = StringOperations.formatCurrency(coin.price)
             marketCap.text = StringOperations.formatCurrency(coin.marketCap)
 
