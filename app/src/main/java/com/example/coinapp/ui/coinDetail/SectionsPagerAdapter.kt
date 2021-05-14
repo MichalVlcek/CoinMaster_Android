@@ -1,3 +1,5 @@
+@file:JvmName("CoinDetailViewModelKt")
+
 package com.example.coinapp.ui.coinDetail
 
 import androidx.fragment.app.Fragment

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
-import com.example.coinapp.ui.coinDetail.PageViewModel
+import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class InfoFragment : Fragment() {
 
@@ -26,7 +26,7 @@ class InfoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(PageViewModel::class.java)
+        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
         viewModel.coin.observe(
             viewLifecycleOwner,

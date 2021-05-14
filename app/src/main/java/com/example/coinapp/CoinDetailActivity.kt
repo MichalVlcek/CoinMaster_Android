@@ -3,7 +3,7 @@ package com.example.coinapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.coinapp.data.Coin
-import com.example.coinapp.ui.coinDetail.TabHolderFragment
+import com.example.coinapp.ui.coinDetail.CoinDetailFragment
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class CoinDetailActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(
                     android.R.id.content,
-                    TabHolderFragment.newInstance(coin)
+                    CoinDetailFragment.newInstance(coin)
                 )
                 .commitNow()
         }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.coinapp.data.Coin
 
-class PageViewModel : ViewModel() {
+class CoinDetailViewModel : ViewModel() {
 
     private val _coin = MutableLiveData<Coin>()
 

@@ -13,11 +13,11 @@ import com.example.coinapp.databinding.CoinDetailTabHolderFragmentBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class TabHolderFragment : Fragment() {
+class CoinDetailFragment : Fragment() {
 
     companion object {
         fun newInstance(coin: Coin) =
-            TabHolderFragment().apply {
+            CoinDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(CoinDetailActivity.COIN, coin)
                 }
@@ -50,7 +50,7 @@ class TabHolderFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(PageViewModel::class.java)
+        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
         viewModel.setCoin(coin!!)
 
