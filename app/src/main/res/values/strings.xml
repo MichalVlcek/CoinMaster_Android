@@ -15,6 +15,16 @@
     <string name="title_activity_coin_detail">CoinDetailActivity</string>
     <string name="coin_info">Coin Info</string>
     <string name="transactions">Transactions</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- COIN INFO STRINGS -->
+    <string name="holdings">Holdings:</string>
+    <string name="zero">0</string>
+    <string name="average_buy_price">Average Buy Price:</string>
+    <string name="percentage_change">Percentage Change:</string>
+    <string name="rank">Rank:</string>
+    <string name="current_price">Current Price:</string>
+    <string name="holdings_value">Holdings Value:</string>
+    <string name="current_deposit">Current Deposit:</string>
+    <string name="profit_loss">Profit / Loss:</string>
+    <string name="market_cap">Market Cap:</string>
+    <string name="circulating_supply">Circulating Supply:</string>
 </resources>
