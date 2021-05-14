@@ -3,6 +3,7 @@ package com.example.coinapp.ui.coinDetail
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.coinapp.R
+import com.example.coinapp.data.Coin
 import com.example.coinapp.ui.coinDetail.info.InfoFragment
 import com.example.coinapp.ui.coinDetail.transactions.TransactionFragment
 
@@ -11,21 +12,21 @@ val TAB_TITLES = arrayOf(
     R.string.transactions
 )
 
-private val FRAGMENTS = arrayOf(
-    InfoFragment(),
-    TransactionFragment()
-)
-
 /**
  * A [FragmentStateAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(fragment: Fragment) :
+class SectionsPagerAdapter(fragment: Fragment, coin: Coin) :
     FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 2
+    private val fragments = arrayOf(
+        InfoFragment.newInstance(coin),
+        TransactionFragment.newInstance(coin)
+    )
+
+    override fun getItemCount(): Int = fragments.size
 
     override fun createFragment(position: Int): Fragment {
-        return FRAGMENTS[position]
+        return fragments[position]
     }
 }

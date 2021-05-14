@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.coinapp.CoinDetailActivity
+import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailTabHolderFragmentBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,8 +15,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 class TabHolderFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TabHolderFragment()
+        fun newInstance(coin: Coin) =
+            TabHolderFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(CoinDetailActivity.COIN, coin)
+                }
+            }
     }
+
+    private var coin: Coin? = null
 
     private lateinit var pagerAdapter: SectionsPagerAdapter
     private lateinit var viewPager: ViewPager2
@@ -22,6 +31,13 @@ class TabHolderFragment : Fragment() {
     private var _binding: CoinDetailTabHolderFragmentBinding? = null
     private val binding
         get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            coin = it.getParcelable(CoinDetailActivity.COIN)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +49,7 @@ class TabHolderFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pagerAdapter = SectionsPagerAdapter(this)
+        pagerAdapter = SectionsPagerAdapter(this, coin!!)
 
         viewPager = binding.viewPager
 
