@@ -31,4 +31,14 @@
     <string name="date_placeholder">03.04.2021</string>
     <string name="amount_placeholder">0.000005 BTC</string>
     <string name="add_transaction">Add Transaction</string>
+    <string name="transaction_type">Transaction Type:</string>
+    <string name="price_per_coin">Price Per Coin:</string>
+    <string name="amount">Amount:</string>
+    <string name="fee">Fee:</string>
+    <string name="date">Date:</string>
+    <string name="description">Description:</string>
+    <string name="type_description">Type Description:</string>
+    <string name="price">Price</string>
+    <string name="amount_edit_text">Amount</string>
+    <string name="fee_edit_text">Fee</string>
 </resources>

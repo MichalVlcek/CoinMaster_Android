@@ -34,6 +34,7 @@
         android:hint="@string/search"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        style="@style/PrettyEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

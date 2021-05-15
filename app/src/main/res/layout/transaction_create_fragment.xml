@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.transaction.TransactionCreateFragment">
+
+
+    <TextView
+        android:id="@+id/transaction_type_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/HeadingTextView"
+        android:text="@string/transaction_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/transaction_price_heading"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/price_per_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_type_heading" />
+
+    <TextView
+        android:id="@+id/transaction_amount_heading"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_price_heading" />
+
+    <TextView
+        android:id="@+id/transaction_fee_heading"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/fee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_amount_heading" />
+
+    <TextView
+        android:id="@+id/transaction_date_heading"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_fee_heading" />
+
+    <TextView
+        android:id="@+id/transaction_description_heading"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_date_heading" />
+
+    <EditText
+        android:id="@+id/transaction_description"
+        style="@style/PrettyEditText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="start"
+        android:hint="@string/type_description"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/transaction_button_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_description_heading"
+        android:importantForAutofill="no" />
+
+    <Spinner
+        android:id="@+id/transaction_type"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/transaction_price"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:gravity="end"
+        android:hint="@string/price"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_type"
+        style="@style/BasicEditText"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/transaction_amount"
+        style="@style/BasicEditText"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:hint="@string/amount_edit_text"
+        android:inputType="number"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_price"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/transaction_fee"
+        style="@style/BasicEditText"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:hint="@string/fee_edit_text"
+        android:inputType="number"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_amount"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/transaction_button_add"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:text="@string/add_transaction"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/transaction_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/date_placeholder"
+        style="@style/HeadingTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_fee" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

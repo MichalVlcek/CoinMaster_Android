@@ -17,6 +17,5 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/white</item>
         <item name="buttonStyle">@style/BasicButton</item>
-        <item name="editTextStyle">@style/BasicEditText</item>
     </style>
 </resources>
