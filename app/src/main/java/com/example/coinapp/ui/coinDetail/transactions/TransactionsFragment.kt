@@ -63,4 +63,9 @@ class TransactionsFragment : Fragment() {
     private fun openEditTransaction(transaction: Transaction) {
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

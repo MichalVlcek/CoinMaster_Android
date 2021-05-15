@@ -70,4 +70,9 @@ class CoinDetailFragment : Fragment() {
             tab.text = getString(TAB_TITLES[position])
         }.attach()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

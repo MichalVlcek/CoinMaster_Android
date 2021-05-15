@@ -27,6 +27,7 @@
     <string name="profit_loss">Profit / Loss:</string>
     <string name="market_cap">Market Cap:</string>
     <string name="circulating_supply">Circulating Supply:</string>
+
     <string name="type_placeholder">SEND</string>
     <string name="date_placeholder">03.04.2021</string>
     <string name="amount_placeholder">0.000005 BTC</string>
@@ -41,4 +42,12 @@
     <string name="price">Price</string>
     <string name="amount_edit_text">Amount</string>
     <string name="fee_edit_text">Fee</string>
+
+    <string-array name="transaction_types_array">
+        <item>Buy</item>
+        <item>Sell</item>
+        <item>Transfer between wallets/exchanges</item>
+        <item>Send to external source</item>
+        <item>Accept from external source</item>
+    </string-array>
 </resources>

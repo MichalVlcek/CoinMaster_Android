@@ -69,4 +69,9 @@ class InfoFragment : Fragment() {
             binding.supply.text = StringOperations.formatCurrency(coin.supply, coin)
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
