@@ -6,6 +6,7 @@ import android.widget.ViewSwitcher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
+import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionsItemBinding
 import com.example.coinapp.helper.StringOperations
@@ -39,12 +40,18 @@ class TransactionsAdapter(
         private val date = itemBinding.date
         private val cost = itemBinding.cost
         private val amount = itemBinding.amount
+        private val fee = itemBinding.fee
 
         fun bind(transaction: Transaction) {
             type.text = transaction.type.toString()
             date.text = transaction.date.toString()
             cost.text = StringOperations.formatCurrency(transaction.cost)
             amount.text = coin?.let { StringOperations.formatCurrency(transaction.amount, it) }
+
+            fee.text = when (transaction.feeType) {
+                FeeType.DOLLAR -> StringOperations.formatCurrency(transaction.fee)
+                FeeType.COIN -> coin?.let { StringOperations.formatCurrency(transaction.fee, it) }
+            }
 
             itemView.setOnClickListener { onClick(transaction) }
         }
