@@ -25,4 +25,9 @@
     <style name="HeadingTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/big_text</item>
     </style>
+
+    <style name="HeadingTextViewMuted" parent="HeadingTextView">
+        <item name="android:textSize">@dimen/big_text</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
 </resources>
