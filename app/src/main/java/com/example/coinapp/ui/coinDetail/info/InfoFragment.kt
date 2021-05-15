@@ -1,5 +1,6 @@
 package com.example.coinapp.ui.coinDetail.info
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +40,19 @@ class InfoFragment : Fragment() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindData(coin: Coin?) {
         coin?.let {
+            binding.holdings.text = StringOperations.formatCurrency(viewModel.countHoldings(), coin)
+            binding.value.text = StringOperations.formatCurrency(viewModel.countHoldingsValue())
+            binding.buyPrice.text =
+                StringOperations.formatCurrency(viewModel.countAverageTransactionCost())
+            binding.deposit.text = StringOperations.formatCurrency(viewModel.countTotalCost())
+            binding.percentChange.text =
+                StringOperations.formatPercentage(viewModel.countPercentageChange())
+            binding.profitLoss.text = StringOperations.formatCurrency(viewModel.countProfitOrLoss())
+
+            //Coin info
             binding.rank.text = "#${it.rank}"
             binding.price.text = StringOperations.formatCurrency(it.price)
             binding.marketCap.text = StringOperations.formatCurrency(it.marketCap)

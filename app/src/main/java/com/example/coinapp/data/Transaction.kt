@@ -9,5 +9,8 @@ data class Transaction(
     val type: TransactionType,
     val date: LocalDate,
     val cost: Double,
-    val amount: Double
+    val amount: Double,
+    val fee: Double,
+    val feeType: FeeType,
+    val description: String = ""
 ) : Parcelable

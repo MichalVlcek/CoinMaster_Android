@@ -15,4 +15,11 @@ object StringOperations {
 
         return numberFormat.format(money) + " " + coin.symbol
     }
+
+    fun formatPercentage(percentage: Double): String {
+        val numberFormat = NumberFormat.getInstance()
+        numberFormat.maximumFractionDigits = 2
+
+        return numberFormat.format((percentage - 1) * 100) + "%"
+    }
 }

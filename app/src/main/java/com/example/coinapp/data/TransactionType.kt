@@ -3,5 +3,7 @@ package com.example.coinapp.data
 enum class TransactionType {
     BUY,
     SELL,
-    SEND
+    TRANSFER,
+    SEND_IN,
+    SEND_OUT
 }
