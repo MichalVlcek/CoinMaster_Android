@@ -20,6 +20,6 @@ object StringOperations {
         val numberFormat = NumberFormat.getInstance()
         numberFormat.maximumFractionDigits = 2
 
-        return numberFormat.format((percentage - 1) * 100) + "%"
+        return numberFormat.format(percentage * 100) + "%"
     }
 }

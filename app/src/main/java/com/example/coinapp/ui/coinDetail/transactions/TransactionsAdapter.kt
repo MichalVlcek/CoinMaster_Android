@@ -10,6 +10,7 @@ import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionsItemBinding
 import com.example.coinapp.helper.StringOperations
+import com.example.coinapp.helper.TextViewOperations.setTextAndColor
 
 class TransactionsAdapter(
     private val switcher: ViewSwitcher,
@@ -43,7 +44,7 @@ class TransactionsAdapter(
         private val fee = itemBinding.fee
 
         fun bind(transaction: Transaction) {
-            type.text = transaction.type.toString()
+            type.setTextAndColor(transaction.type)
             date.text = transaction.date.toString()
             cost.text = StringOperations.formatCurrency(transaction.cost)
             amount.text = coin?.let { StringOperations.formatCurrency(transaction.amount, it) }

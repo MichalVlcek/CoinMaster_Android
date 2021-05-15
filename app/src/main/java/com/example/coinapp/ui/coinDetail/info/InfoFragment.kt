@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
 import com.example.coinapp.helper.StringOperations
+import com.example.coinapp.helper.TextViewOperations.setTextAndColor
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class InfoFragment : Fragment() {
@@ -48,9 +49,18 @@ class InfoFragment : Fragment() {
             binding.buyPrice.text =
                 StringOperations.formatCurrency(viewModel.countAverageTransactionCost())
             binding.deposit.text = StringOperations.formatCurrency(viewModel.countTotalCost())
-            binding.percentChange.text =
-                StringOperations.formatPercentage(viewModel.countPercentageChange())
-            binding.profitLoss.text = StringOperations.formatCurrency(viewModel.countProfitOrLoss())
+
+            val percentChange = viewModel.countPercentageChange()
+            binding.percentChange.setTextAndColor(
+                StringOperations.formatPercentage(percentChange),
+                percentChange
+            )
+
+            val profitLoss = viewModel.countProfitOrLoss()
+            binding.profitLoss.setTextAndColor(
+                StringOperations.formatCurrency(profitLoss),
+                profitLoss
+            )
 
             //Coin info
             binding.rank.text = "#${it.rank}"

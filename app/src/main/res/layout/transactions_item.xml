@@ -16,10 +16,10 @@
         android:id="@+id/type"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="start"
         android:text="@string/type_placeholder"
         android:textColor="@android:color/holo_green_dark"
-        grid:layout_columnWeight="2"
+        grid:layout_columnWeight="3"
         grid:layout_gravity="fill_horizontal" />
 
     <TextView

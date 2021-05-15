@@ -22,6 +22,16 @@ class CoinDetailViewModel : ViewModel() {
             Transaction(TransactionType.BUY, LocalDate.now(), 20.0, 0.00012, 0.1, FeeType.DOLLAR),
             Transaction(TransactionType.SELL, LocalDate.now(), 15.0, 0.0001, 0.1, FeeType.DOLLAR),
             Transaction(TransactionType.BUY, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
+            Transaction(TransactionType.SEND, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
+            Transaction(TransactionType.MOVE, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
+            Transaction(
+                TransactionType.RECEIVE,
+                LocalDate.now(),
+                20.0,
+                0.00022,
+                0.1,
+                FeeType.DOLLAR
+            ),
         )
     }
 
@@ -34,7 +44,7 @@ class CoinDetailViewModel : ViewModel() {
     fun setCoin(newCoin: Coin) {
         _coin.value = newCoin
     }
-    
+
     private fun getTransactionsByType(type: TransactionType): List<Transaction> {
         return transactions.value
             ?.filter { transaction -> transaction.type == type }
@@ -78,10 +88,10 @@ class CoinDetailViewModel : ViewModel() {
             getSumOfTransactionsAmount(getTransactionsByType(TransactionType.SELL))
 
         val sendInTransactions =
-            getSumOfTransactionsAmount(getTransactionsByType(TransactionType.SEND_IN))
+            getSumOfTransactionsAmount(getTransactionsByType(TransactionType.RECEIVE))
 
         val sendOutTransactions =
-            getSumOfTransactionsAmount(getTransactionsByType(TransactionType.SEND_OUT))
+            getSumOfTransactionsAmount(getTransactionsByType(TransactionType.SEND))
 
         return buyTransactions + sendInTransactions - sellTransactions - sendOutTransactions -
                 getFeesSum(FeeType.COIN)
@@ -127,6 +137,6 @@ class CoinDetailViewModel : ViewModel() {
      * Formula: Current holdings value / Total Cost
      */
     fun countPercentageChange(): Double {
-        return countHoldingsValue() / countTotalCost()
+        return (countHoldingsValue() / countTotalCost()) - 1
     }
 }
