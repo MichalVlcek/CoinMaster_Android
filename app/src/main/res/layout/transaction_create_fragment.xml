@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/transaction_button_add"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/button_height"
         android:text="@string/add_transaction"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"

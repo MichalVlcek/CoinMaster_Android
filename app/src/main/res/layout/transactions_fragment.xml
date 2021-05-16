@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:padding="@dimen/basic_padding"
     tools:context=".ui.coinDetail.transactions.TransactionsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/addTransactionButton"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/button_height"
         android:text="@string/add_transaction"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"

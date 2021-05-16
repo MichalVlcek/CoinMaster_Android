@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:padding="@dimen/basic_padding"
     tools:context=".ui.coinDetail.info.InfoFragment">
 
     <TextView
