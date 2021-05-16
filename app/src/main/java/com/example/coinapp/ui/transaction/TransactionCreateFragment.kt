@@ -40,8 +40,9 @@ class TransactionCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CoinDetailViewModel::class.java)
+        val form = binding.form
 
-        val typeSpinner = binding.transactionType
+        val typeSpinner = form.transactionType
 
         ArrayAdapter.createFromResource(
             requireContext(),
@@ -52,9 +53,9 @@ class TransactionCreateFragment : Fragment() {
             typeSpinner.adapter = adapter
         }
 
-        val dateLabel = binding.transactionDate
+        val dateLabel = binding.form.transactionDate
         dateLabel.text = LocalDate.now().toString()
-        binding.transactionDate.setOnClickListener { showDatePickerDialog(dateLabel) }
+        form.transactionDate.setOnClickListener { showDatePickerDialog(dateLabel) }
 
         binding.transactionButtonAdd.setOnClickListener { addTransaction() }
     }
@@ -66,13 +67,15 @@ class TransactionCreateFragment : Fragment() {
 
     private fun addTransaction() {
         //TODO implement FEE type
+        val form = binding.form
+
         try {
-            val type = TransactionType.values()[binding.transactionType.selectedItemPosition]
-            val coinPrice = binding.transactionPrice.text.toString().toDouble()
-            val amount = binding.transactionAmount.text.toString().toDouble()
-            val fee = binding.transactionFee.text.toString().toDouble()
-            val date = LocalDate.parse(binding.transactionDate.text)
-            val description = binding.transactionDescription.text.toString()
+            val type = TransactionType.values()[form.transactionType.selectedItemPosition]
+            val coinPrice = form.transactionPrice.text.toString().toDouble()
+            val amount = form.transactionAmount.text.toString().toDouble()
+            val fee = form.transactionFee.text.toString().toDouble()
+            val date = LocalDate.parse(form.transactionDate.text)
+            val description = form.transactionDescription.text.toString()
 
             val transaction = Transaction(
                 type,

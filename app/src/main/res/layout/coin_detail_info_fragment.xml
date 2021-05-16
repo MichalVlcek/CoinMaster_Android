@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".ui.coinDetail.info.InfoFragment">
 
     <TextView
@@ -266,4 +267,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/percent_change" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/unwatch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/unwatch"
+            android:backgroundTint="@color/red"
+            app:cornerRadius="12dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="0.45"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/info_add_transaction_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            app:cornerRadius="12dp"
+            android:text="@string/add_transaction"
+            android:layout_weight="0.45"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

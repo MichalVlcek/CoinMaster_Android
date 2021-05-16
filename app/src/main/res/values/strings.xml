@@ -43,6 +43,9 @@
     <string name="amount_edit_text">Amount</string>
     <string name="fee_edit_text">Fee</string>
     <string name="placeholder_text">Placeholder Text</string>
+    <string name="unwatch">Unwatch</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">
