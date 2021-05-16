@@ -9,6 +9,10 @@ object StringOperations {
         return NumberFormat.getInstance().format(money) + "$"
     }
 
+    fun formatRank(rank: Int): String {
+        return "#$rank"
+    }
+
     fun formatCurrency(money: Double, coin: Coin): String {
         val numberFormat = NumberFormat.getInstance()
         numberFormat.maximumFractionDigits = 10

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.R
+import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionType
@@ -57,7 +58,9 @@ class TransactionCreateFragment : Fragment() {
         dateLabel.text = LocalDate.now().toString()
         form.transactionDate.setOnClickListener { showDatePickerDialog(dateLabel) }
 
-        binding.transactionButtonAdd.setOnClickListener { addTransaction() }
+        val coin = viewModel.coin.value
+
+        binding.transactionButtonAdd.setOnClickListener { addTransaction(coin) }
     }
 
     private fun showDatePickerDialog(label: TextView) {
@@ -65,7 +68,7 @@ class TransactionCreateFragment : Fragment() {
         newFragment.show(parentFragmentManager, "datePicker")
     }
 
-    private fun addTransaction() {
+    private fun addTransaction(coin: Coin?) {
         //TODO implement FEE type
         val form = binding.form
 
@@ -78,6 +81,7 @@ class TransactionCreateFragment : Fragment() {
             val description = form.transactionDescription.text.toString()
 
             val transaction = Transaction(
+                coin,
                 type,
                 date,
                 coinPrice * amount + fee,

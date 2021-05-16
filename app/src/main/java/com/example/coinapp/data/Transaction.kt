@@ -6,6 +6,7 @@ import java.time.LocalDate
 
 @Parcelize
 data class Transaction(
+    val coin: Coin?, //TODO shouldn't be null probably
     val type: TransactionType,
     val date: LocalDate,
     val cost: Double,
