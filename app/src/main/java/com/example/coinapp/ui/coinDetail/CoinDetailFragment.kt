@@ -26,6 +26,8 @@ class CoinDetailFragment : Fragment() {
 
     private var coin: Coin? = null
 
+    private lateinit var viewModel: CoinDetailViewModel
+
     private lateinit var pagerAdapter: SectionsPagerAdapter
     private lateinit var viewPager: ViewPager2
 
@@ -46,11 +48,18 @@ class CoinDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = CoinDetailTabHolderFragmentBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.updateTransactions()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
         viewModel.setCoin(coin!!)
 
@@ -66,5 +75,10 @@ class CoinDetailFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getString(TAB_TITLES[position])
         }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

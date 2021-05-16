@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -65,8 +64,9 @@ class AddCoinFragment : Fragment() {
     }
 
     private fun adapterOnClick(coin: Coin) {
+        //TODO coin adding to viewModel
         CoinList.coins.add(coin) //TODO update this by using database
-        NavUtils.navigateUpFromSameTask(this.requireActivity())
+        requireActivity().finish()
     }
 
     private fun refreshData() {

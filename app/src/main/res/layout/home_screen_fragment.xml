@@ -5,7 +5,7 @@
     android:id="@+id/homeScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8sp"
+    android:padding="@dimen/basic_padding"
     tools:context=".ui.homeScreen.HomeScreenFragment">
 
     <ViewSwitcher
@@ -19,13 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/watchedCoinsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </ViewSwitcher>

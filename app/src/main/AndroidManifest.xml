@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinApp">
         <activity
+            android:name=".TransactionCreateActivity"
+            android:parentActivityName=".HomeScreenActivity" />
+        <activity
             android:name=".CoinDetailActivity"
             android:label="@string/title_activity_coin_detail"
             android:parentActivityName=".HomeScreenActivity" />

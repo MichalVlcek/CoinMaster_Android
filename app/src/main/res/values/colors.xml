@@ -8,5 +8,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#9B9B9B</color>
+    <color name="grey">#C3C3C3</color>
+    <color name="green">#7CB342</color>
+    <color name="red">#FF1744</color>
+    <color name="background_color_light">#2A324D</color>
 </resources>

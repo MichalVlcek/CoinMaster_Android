@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
+import com.example.coinapp.helper.StringOperations
+import com.example.coinapp.helper.TextViewOperations.setTextAndColor
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class InfoFragment : Fragment() {
+
+    private lateinit var viewModel: CoinDetailViewModel
 
     private var _binding: CoinDetailInfoFragmentBinding? = null
     private val binding
@@ -26,22 +30,47 @@ class InfoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
-        viewModel.coin.observe(
+        viewModel.transactions.observe(
             viewLifecycleOwner,
             {
-                bindData(it)
+                bindData(viewModel.coin.value)
             }
         )
+
     }
 
     private fun bindData(coin: Coin?) {
         coin?.let {
-            binding.rank.text = "#${it.rank}"
-            binding.price.text = "${it.price}$"
-            binding.marketCap.text = "${it.marketCap.toBigDecimal().toPlainString()}$"
-            binding.supply.text = it.supply.toBigDecimal().toPlainString()
+            binding.holdings.text = StringOperations.formatCurrency(viewModel.countHoldings(), coin)
+            binding.value.text = StringOperations.formatCurrency(viewModel.countHoldingsValue())
+            binding.buyPrice.text =
+                StringOperations.formatCurrency(viewModel.countAverageTransactionCost())
+            binding.deposit.text = StringOperations.formatCurrency(viewModel.countTotalCost())
+
+            val percentChange = viewModel.countPercentageChange()
+            binding.percentChange.setTextAndColor(
+                StringOperations.formatPercentage(percentChange),
+                percentChange
+            )
+
+            val profitLoss = viewModel.countProfitOrLoss()
+            binding.profitLoss.setTextAndColor(
+                StringOperations.formatCurrency(profitLoss),
+                profitLoss
+            )
+
+            //Coin info
+            binding.rank.text = StringOperations.formatRank(it.rank)
+            binding.price.text = StringOperations.formatCurrency(it.price)
+            binding.marketCap.text = StringOperations.formatCurrency(it.marketCap)
+            binding.supply.text = StringOperations.formatCurrency(coin.supply, coin)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

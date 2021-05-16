@@ -15,9 +15,11 @@ class CoinDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.coin_detail_tab_holder_fragment)
 
-        if (savedInstanceState == null) {
-            val coin = intent.extras?.getParcelable<Coin>(COIN)!!
+        val coin = intent.extras?.getParcelable<Coin>(COIN)!!
 
+        supportActionBar?.title = coin.name
+
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(
                     android.R.id.content,

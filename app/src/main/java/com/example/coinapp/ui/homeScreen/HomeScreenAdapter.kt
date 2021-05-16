@@ -8,6 +8,7 @@ import coil.load
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
+import com.example.coinapp.helper.StringOperations
 
 class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick: (Coin) -> Unit) :
     RecyclerView.Adapter<HomeScreenAdapter.ViewHolder>() {
@@ -28,13 +29,13 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
     class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         private val icon = itemBinding.coinIcon
-        private val name = itemBinding.coinName
+        private val symbol = itemBinding.coinSymbol
         private val price = itemBinding.coinPrice
 
         fun bind(coin: Coin) {
             icon.load(coin.icon)
-            name.text = coin.name
-            price.text = "${coin.price}$"
+            symbol.text = coin.symbol
+            price.text = StringOperations.formatCurrency(coin.price)
 
             itemView.setOnClickListener { onClick(coin) }
         }

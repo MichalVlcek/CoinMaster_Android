@@ -5,49 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/basic_padding"
-    tools:context=".AddCoinActivity">
-
-    <TextView
-        android:id="@+id/watchedCoins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/added_coins_placeholder"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/userType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_type_placeholder"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/search"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        style="@style/PrettyEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+    tools:context=".ui.coinDetail.transactions.TransactionsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addTransactionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ViewSwitcher
             android:id="@+id/switcher"
@@ -63,12 +30,22 @@
                 android:layout_marginTop="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/watchedCoinsList"
+                android:id="@+id/transactionsList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </ViewSwitcher>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/addTransactionButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/add_transaction"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
