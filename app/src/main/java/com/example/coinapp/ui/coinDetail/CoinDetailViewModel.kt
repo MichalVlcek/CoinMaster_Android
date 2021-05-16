@@ -19,24 +19,39 @@ class CoinDetailViewModel : ViewModel() {
     val coin: LiveData<Coin>
         get() = _coin
 
+    /**
+     * Creates a new transaction
+     */
     fun createNewTransaction(transaction: Transaction) {
         TransactionList.transactions.add(transaction)
     }
 
+    /**
+     * Updates [_transactions] LiveData field
+     */
     fun updateTransactions() {
         _transactions.value = TransactionList.transactions
     }
 
+    /**
+     * Sets new value to [_coin] LiveData field
+     */
     fun setCoin(newCoin: Coin) {
         _coin.value = newCoin
     }
 
+    /**
+     * Returns List of transactions with transaction type of [type]
+     */
     private fun getTransactionsByType(type: TransactionType): List<Transaction> {
         return transactions.value
             ?.filter { transaction -> transaction.type == type }
             ?: emptyList()
     }
 
+    /**
+     * Returns sum of all [FeeType.DOLLAR] fees
+     */
     private fun getFeesSum(type: FeeType): Double {
         return transactions.value
             ?.filter { transaction -> transaction.feeType == type }
@@ -44,6 +59,9 @@ class CoinDetailViewModel : ViewModel() {
             ?.sum() ?: 0.0
     }
 
+    /**
+     * Returns dollar value of all transactions with [FeeType.COIN]
+     */
     private fun getCoinFeesInDollars(): Double {
         return transactions.value
             ?.filter { transaction -> transaction.feeType == FeeType.COIN }
@@ -51,12 +69,18 @@ class CoinDetailViewModel : ViewModel() {
             ?.sum() ?: 0.0
     }
 
+    /**
+     * Return sum of coin amount of all transactions from [pickedTransactions] list
+     */
     private fun getSumOfTransactionsAmount(pickedTransactions: List<Transaction>): Double {
         return pickedTransactions
             .map { transaction -> transaction.amount }
             .sum()
     }
 
+    /**
+     * Returns sum of cost of all transactions from [pickedTransactions] List
+     */
     private fun getSumOfTransactionCost(pickedTransactions: List<Transaction>): Double {
         return pickedTransactions
             .map { transaction -> transaction.cost }
@@ -120,7 +144,7 @@ class CoinDetailViewModel : ViewModel() {
 
     /**
      * Counts the percentage difference between value of current holdings and total cost
-     * Formula: Current holdings value / Total Cost
+     * Formula: Current holdings value / Total Cost - 1
      */
     fun countPercentageChange(): Double {
         return (countHoldingsValue() / countTotalCost()) - 1
