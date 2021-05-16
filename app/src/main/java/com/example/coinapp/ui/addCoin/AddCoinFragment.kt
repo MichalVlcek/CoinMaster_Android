@@ -65,6 +65,7 @@ class AddCoinFragment : Fragment() {
     }
 
     private fun adapterOnClick(coin: Coin) {
+        //TODO coin adding to viewModel
         CoinList.coins.add(coin) //TODO update this by using database
         NavUtils.navigateUpFromSameTask(this.requireActivity())
     }

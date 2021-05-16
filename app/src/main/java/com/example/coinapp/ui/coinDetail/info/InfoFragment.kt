@@ -33,12 +33,13 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
-        viewModel.coin.observe(
+        viewModel.transactions.observe(
             viewLifecycleOwner,
             {
-                bindData(it)
+                bindData(viewModel.coin.value)
             }
         )
+
     }
 
     @SuppressLint("SetTextI18n")

@@ -3,36 +3,14 @@ package com.example.coinapp.ui.coinDetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.FeeType
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionType
-import java.time.LocalDate
+import com.example.coinapp.data.*
 
 class CoinDetailViewModel : ViewModel() {
 
     private val _coin = MutableLiveData<Coin>()
 
     private val _transactions = MutableLiveData<List<Transaction>>().apply {
-        value = listOf(
-            Transaction(TransactionType.BUY, LocalDate.now(), 20.0, 0.0005, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.BUY, LocalDate.now(), 50.0, 0.001, 0.0001, FeeType.COIN),
-            Transaction(TransactionType.SELL, LocalDate.now(), 20.0, 0.0008, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.BUY, LocalDate.now(), 5.0, 0.0005, 0.0001, FeeType.COIN),
-            Transaction(TransactionType.BUY, LocalDate.now(), 20.0, 0.00012, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.SELL, LocalDate.now(), 15.0, 0.0001, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.BUY, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.SEND, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
-            Transaction(TransactionType.MOVE, LocalDate.now(), 20.0, 0.00022, 0.1, FeeType.DOLLAR),
-            Transaction(
-                TransactionType.RECEIVE,
-                LocalDate.now(),
-                20.0,
-                0.00022,
-                0.1,
-                FeeType.DOLLAR
-            ),
-        )
+        value = emptyList()
     }
 
     val transactions: LiveData<List<Transaction>>
@@ -40,6 +18,14 @@ class CoinDetailViewModel : ViewModel() {
 
     val coin: LiveData<Coin>
         get() = _coin
+
+    fun createNewTransaction(transaction: Transaction) {
+        TransactionList.transactions.add(transaction)
+    }
+
+    fun updateTransactions() {
+        _transactions.value = TransactionList.transactions
+    }
 
     fun setCoin(newCoin: Coin) {
         _coin.value = newCoin

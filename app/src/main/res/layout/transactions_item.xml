@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/price_placeholder"
-        grid:layout_columnWeight="5"
+        grid:layout_columnWeight="4"
         grid:layout_gravity="fill_horizontal" />
 
     <LinearLayout
@@ -46,7 +46,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="8dp"
-        grid:layout_columnWeight="5"
+        grid:layout_columnWeight="5.5"
         grid:layout_gravity="fill_horizontal">
 
         <TextView

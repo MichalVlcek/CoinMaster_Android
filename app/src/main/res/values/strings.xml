@@ -42,12 +42,14 @@
     <string name="price">Price</string>
     <string name="amount_edit_text">Amount</string>
     <string name="fee_edit_text">Fee</string>
+    <string name="placeholder_text">Placeholder Text</string>
 
+    <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">
         <item>Buy</item>
         <item>Sell</item>
-        <item>Transfer between wallets/exchanges</item>
+        <item>Move between wallets/exchanges</item>
+        <item>Receive from external source</item>
         <item>Send to external source</item>
-        <item>Accept from external source</item>
     </string-array>
 </resources>

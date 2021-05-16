@@ -52,6 +52,12 @@ class CoinDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.updateTransactions()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(requireActivity()).get(CoinDetailViewModel::class.java)
 
