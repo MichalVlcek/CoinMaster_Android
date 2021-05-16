@@ -12,12 +12,12 @@ import java.util.*
 class DatePickerFragment(
     private val label: TextView
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
-    
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current date as the default date in the picker
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
+        val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         // Create a new instance of DatePickerDialog and return it
