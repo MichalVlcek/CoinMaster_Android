@@ -27,10 +27,11 @@ class CoinDetailViewModel : ViewModel() {
     }
 
     /**
-     * Updates [_transactions] LiveData field
+     * Updates [_transactions] LiveData field with sorted transactions from database
      */
     fun updateTransactions() {
         _transactions.value = TransactionList.transactions
+            .sortedByDescending { transaction -> transaction.date }
     }
 
     /**
