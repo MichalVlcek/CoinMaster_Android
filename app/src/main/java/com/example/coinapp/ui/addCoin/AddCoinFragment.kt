@@ -73,8 +73,19 @@ class AddCoinFragment : Fragment() {
      * Adds [coin] to database and ends this activity
      */
     private fun adapterOnClick(coin: Coin) {
-        viewModel.addCoin(coin)
-        requireActivity().finish()
+        lifecycleScope.launch {
+            try {
+                viewModel.addCoin(coin)
+                requireActivity().finish()
+            } catch (e: Exception) {
+                Snackbar.make(
+                    requireContext(),
+                    requireView(),
+                    "Something bad happened, can't add coin.",
+                    4000
+                ).show()
+            }
+        }
     }
 
     /**

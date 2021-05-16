@@ -10,6 +10,11 @@ class CoinRepository(context: Context) {
     private val coinDao = CoinDatabase.getInstance(context).coinDao()
 
     @WorkerThread
+    suspend fun insertCoin(coin: Coin) {
+        coinDao.insertAll(coin)
+    }
+
+    @WorkerThread
     suspend fun loadAllCoins(): List<Coin> {
         var coins: List<Coin> = emptyList()
         try {

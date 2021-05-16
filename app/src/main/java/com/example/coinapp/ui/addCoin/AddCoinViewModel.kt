@@ -1,15 +1,19 @@
 package com.example.coinapp.ui.addCoin
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.api.ApiService
 import com.example.coinapp.data.Coin
-import com.example.coinapp.data.CoinList
+import com.example.coinapp.data.CoinRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-class AddCoinViewModel : ViewModel() {
+class AddCoinViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository by lazy { CoinRepository(application) }
 
     private val _items = MutableLiveData<List<Coin>>().apply {
         value = emptyList()
@@ -28,8 +32,11 @@ class AddCoinViewModel : ViewModel() {
     /**
      * Adds [coin] to database
      */
-    fun addCoin(coin: Coin) {
-        CoinList.coins.add(coin)
+    suspend fun addCoin(coin: Coin) {
+        val request = viewModelScope.async(Dispatchers.IO) {
+            repository.insertCoin(coin)
+        }
+        request.await()
     }
 
     /**
