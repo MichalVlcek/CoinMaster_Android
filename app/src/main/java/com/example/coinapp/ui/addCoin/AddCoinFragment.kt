@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.CoinList
 import com.example.coinapp.databinding.AddCoinFragmentBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class AddCoinFragment : Fragment() {
 
@@ -59,7 +62,11 @@ class AddCoinFragment : Fragment() {
                 listAdapter.coins = it
             }
         )
+    }
 
+    override fun onResume() {
+        super.onResume()
+        
         refreshData()
     }
 
@@ -70,7 +77,18 @@ class AddCoinFragment : Fragment() {
     }
 
     private fun refreshData() {
-        viewModel.fetchData()
+        lifecycleScope.launch {
+            try {
+                viewModel.fetchData()
+            } catch (e: Exception) {
+                Snackbar.make(
+                    requireContext(),
+                    requireView(),
+                    "Data loading failed, check your internet connection.",
+                    4000
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
