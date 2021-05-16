@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Coin(
+    val id: String,
     val icon: String,
     val rank: Int,
     val name: String,

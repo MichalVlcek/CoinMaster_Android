@@ -27,6 +27,7 @@ class AddCoinViewModel : ViewModel() {
                 page = 1
             ).markets.map { market ->
                 Coin(
+                    id = market.id ?: "",
                     icon = market.image ?: "",
                     rank = market.marketCapRank.toInt(),
                     name = market.name ?: "",
