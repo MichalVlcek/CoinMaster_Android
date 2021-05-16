@@ -18,6 +18,9 @@ class ApiService {
         }
     }
 
+    /**
+     * Gets a list of coins from external api
+     */
     suspend fun getCoins(): List<Coin> {
         return coinGecko.getCoinMarkets(
             vsCurrency = "usd",

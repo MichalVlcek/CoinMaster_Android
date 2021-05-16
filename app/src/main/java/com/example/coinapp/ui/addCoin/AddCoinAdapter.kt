@@ -19,6 +19,7 @@ class AddCoinAdapter(
         set(value) {
             field = value
             notifyDataSetChanged()
+
             if (value.isEmpty()) {
                 if (switcher.currentView.id != R.id.loadingBar) {
                     switcher.showNext()
@@ -36,10 +37,12 @@ class AddCoinAdapter(
         private val price = itemBinding.coinPrice
         private val marketCap = itemBinding.coinCap
 
-        //TODO Change the string implementation
+        /**
+         * Binds values to TextViews
+         */
         fun bind(coin: Coin) {
             icon.load(coin.icon)
-            rank.text = "#${coin.rank}"
+            rank.text = StringOperations.formatRank(coin.rank)
             symbol.text = coin.symbol
             price.text = StringOperations.formatCurrency(coin.price)
             marketCap.text = StringOperations.formatCurrency(coin.marketCap)

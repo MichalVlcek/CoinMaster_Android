@@ -41,8 +41,12 @@ class InfoFragment : Fragment() {
 
     }
 
+    /**
+     * Binds data to TextViews on screen
+     */
     private fun bindData(coin: Coin?) {
         coin?.let {
+            // Holdings info
             binding.holdings.text = StringOperations.formatCurrency(viewModel.countHoldings(), coin)
             binding.value.text = StringOperations.formatCurrency(viewModel.countHoldingsValue())
             binding.buyPrice.text =
@@ -61,7 +65,7 @@ class InfoFragment : Fragment() {
                 profitLoss
             )
 
-            //Coin info
+            // Coin info
             binding.rank.text = StringOperations.formatRank(it.rank)
             binding.price.text = StringOperations.formatCurrency(it.price)
             binding.marketCap.text = StringOperations.formatCurrency(it.marketCap)

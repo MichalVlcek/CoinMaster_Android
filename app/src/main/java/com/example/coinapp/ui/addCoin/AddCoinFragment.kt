@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.data.Coin
-import com.example.coinapp.data.CoinList
 import com.example.coinapp.databinding.AddCoinFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -53,7 +52,7 @@ class AddCoinFragment : Fragment() {
         binding.swipeContainer.setOnRefreshListener {
             viewModel.clearItems()
             refreshData()
-            swipeContainer.isRefreshing = false // TODO animation disappears immediately: FIX
+            swipeContainer.isRefreshing = false
         }
 
         viewModel.items.observe(
@@ -66,16 +65,22 @@ class AddCoinFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        
+
         refreshData()
     }
 
+    /**
+     * Adds [coin] to database and ends this activity
+     */
     private fun adapterOnClick(coin: Coin) {
-        //TODO coin adding to viewModel
-        CoinList.coins.add(coin) //TODO update this by using database
+        viewModel.addCoin(coin)
         requireActivity().finish()
     }
 
+    /**
+     * Calls function from viewModel to refresh data
+     * When Exception is caught, SnackBar is shown
+     */
     private fun refreshData() {
         lifecycleScope.launch {
             try {
