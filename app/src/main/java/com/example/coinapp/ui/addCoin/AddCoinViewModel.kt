@@ -13,7 +13,7 @@ import kotlinx.coroutines.async
 
 class AddCoinViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository by lazy { CoinRepository(application) }
+    private val repository by lazy { CoinRepository.getInstance(application) }
 
     private val _items = MutableLiveData<List<Coin>>().apply {
         value = emptyList()

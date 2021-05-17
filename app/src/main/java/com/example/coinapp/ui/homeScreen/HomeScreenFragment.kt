@@ -1,12 +1,12 @@
 package com.example.coinapp.ui.homeScreen
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.AddCoinActivity
@@ -20,6 +20,8 @@ class HomeScreenFragment : Fragment() {
     companion object {
         fun newInstance() = HomeScreenFragment()
     }
+
+    private var firstVisit = true // Used as workaround for missing onRestart() in fragments
 
     private lateinit var listAdapter: HomeScreenAdapter
     private lateinit var viewModel: HomeScreenViewModel
@@ -48,6 +50,13 @@ class HomeScreenFragment : Fragment() {
             adapter = listAdapter
         }
 
+        val swipeContainer = binding.swipeContainer
+        binding.swipeContainer.setOnRefreshListener {
+            viewModel.clearData()
+            updateData()
+            swipeContainer.isRefreshing = false
+        }
+
         viewModel.items.observe(
             viewLifecycleOwner,
             {
@@ -56,11 +65,30 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.fab.setOnClickListener { openAddCoinActivity() }
+
+        updateData()
     }
+
 
     override fun onResume() {
         super.onResume()
 
+        if (!firstVisit) {
+            getData()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        firstVisit = false
+    }
+
+    private fun getData() {
+        viewModel.getData()
+    }
+
+    private fun updateData() {
         viewModel.updateData()
     }
 

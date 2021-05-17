@@ -61,10 +61,6 @@ class AddCoinFragment : Fragment() {
                 listAdapter.coins = it
             }
         )
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         refreshData()
     }
