@@ -8,7 +8,7 @@ interface TransactionDao {
     @Query("SELECT * FROM `transaction`  ORDER BY date(date) DESC")
     fun getAll(): List<Transaction>
 
-    @Query("SELECT * FROM `transaction` WHERE coin_id = :coinId")
+    @Query("SELECT * FROM `transaction` WHERE coin_id = :coinId ORDER BY date(date) DESC")
     fun loadAllByCoin(coinId: String): List<Transaction>
 
     @Query("SELECT * FROM `transaction` WHERE id IN (:ids)")
