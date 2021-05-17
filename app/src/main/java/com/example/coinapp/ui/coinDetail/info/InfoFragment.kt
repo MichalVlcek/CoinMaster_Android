@@ -1,11 +1,13 @@
 package com.example.coinapp.ui.coinDetail.info
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.coinapp.TransactionCreateActivity
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
 import com.example.coinapp.helper.StringOperations
@@ -39,6 +41,18 @@ class InfoFragment : Fragment() {
             }
         )
 
+        binding.unwatchButton.setOnClickListener { unwatchCoin() }
+        binding.infoAddTransactionButton.setOnClickListener { openAddTransaction() }
+    }
+
+    private fun unwatchCoin() {
+        viewModel.unwatchCoin()
+        requireActivity().finish()
+    }
+
+    private fun openAddTransaction() {
+        val intent = Intent(context, TransactionCreateActivity::class.java)
+        startActivity(intent)
     }
 
     /**

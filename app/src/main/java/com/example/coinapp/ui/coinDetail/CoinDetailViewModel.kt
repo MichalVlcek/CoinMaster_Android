@@ -1,11 +1,17 @@
 package com.example.coinapp.ui.coinDetail
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.coinapp.data.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class CoinDetailViewModel : ViewModel() {
+class CoinDetailViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val coinRepository by lazy { CoinRepository.getInstance(application) }
 
     private val _coin = MutableLiveData<Coin>()
 
@@ -18,6 +24,12 @@ class CoinDetailViewModel : ViewModel() {
 
     val coin: LiveData<Coin>
         get() = _coin
+
+    fun unwatchCoin() {
+        viewModelScope.launch(Dispatchers.IO) {
+            coin.value?.let { coinRepository.deleteCoin(it) }
+        }
+    }
 
     /**
      * Creates a new transaction
