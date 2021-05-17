@@ -33,6 +33,13 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
+     * Sets new value to [_coin] LiveData field
+     */
+    fun setCoin(newCoin: Coin) {
+        _coin.value = newCoin
+    }
+
+    /**
      * Updates [_transactions] LiveData field with sorted transactions from database
      */
     fun getTransactionsByCoinId(coinId: String?) {
@@ -43,13 +50,6 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
 
             }
         }
-    }
-
-    /**
-     * Sets new value to [_coin] LiveData field
-     */
-    fun setCoin(newCoin: Coin) {
-        _coin.value = newCoin
     }
 
     /**
