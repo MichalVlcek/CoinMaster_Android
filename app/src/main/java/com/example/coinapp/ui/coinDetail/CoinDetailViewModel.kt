@@ -33,22 +33,28 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * TODO CHECK FOR EXCEPTION
      * Creates a new transaction
      */
     fun createNewTransaction(transaction: Transaction) {
         viewModelScope.launch(Dispatchers.IO) {
-            transactionRepository.insertTransaction(transaction)
+            try {
+                transactionRepository.insertTransaction(transaction)
+            } catch (e: Exception) {
+                
+            }
         }
     }
 
     /**
-     * TODO CHECK FOR EXCEPTION
      * Updates [_transactions] LiveData field with sorted transactions from database
      */
     fun getTransactions() {
         viewModelScope.launch(Dispatchers.IO) {
-            _transactions.postValue(transactionRepository.getAllFromDatabase())
+            try {
+                _transactions.postValue(transactionRepository.getAllFromDatabase())
+            } catch (e: Exception) {
+
+            }
         }
     }
 

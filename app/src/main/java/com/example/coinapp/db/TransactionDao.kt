@@ -5,7 +5,7 @@ import com.example.coinapp.data.Transaction
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * FROM `transaction`  ORDER BY date(date)")
+    @Query("SELECT * FROM `transaction`  ORDER BY date(date) DESC")
     fun getAll(): List<Transaction>
 
     @Query("SELECT * FROM `transaction` WHERE coin_id = :coinId")

@@ -15,6 +15,7 @@ import com.example.coinapp.data.TransactionType
 import com.example.coinapp.databinding.TransactionCreateFragmentBinding
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 import java.time.LocalDate
 
 class TransactionCreateFragment : Fragment() {
@@ -60,7 +61,7 @@ class TransactionCreateFragment : Fragment() {
         val coin = viewModel.coin.value
 
         binding.transactionButtonAdd.setOnClickListener {
-            addTransaction(coin?.id)
+            addTransaction(coin?.id) //TODO ID JE ALWAYS NULL
         }
     }
 
@@ -70,7 +71,30 @@ class TransactionCreateFragment : Fragment() {
     }
 
     private fun addTransaction(coinId: String?) {
-        //TODO implement FEE type
+        try {
+            val transaction = buildTransaction(coinId)
+            insertIntoDatabase(transaction)
+
+            activity?.finish() // Finishes the activity and goes back
+        } catch (e: IOException) {
+            Snackbar.make(
+                requireContext(),
+                requireView(),
+                "Operation Failed, check that inputs are not empty and contains valid values.",
+                4000
+            ).show()
+        } catch (e: Exception) {
+            Snackbar.make(
+                requireContext(),
+                requireView(),
+                "Operation Failed from unknown reasons.",
+                4000
+            ).show()
+        }
+    }
+
+    private fun buildTransaction(coinId: String?): Transaction {
+        //TODO implement Fee type
         val form = binding.form
 
         try {
@@ -81,7 +105,7 @@ class TransactionCreateFragment : Fragment() {
             val date = LocalDate.parse(form.transactionDate.text)
             val description = form.transactionDescription.text.toString()
 
-            val transaction = Transaction(
+            return Transaction(
                 coinId = coinId,
                 type = type,
                 date = date,
@@ -92,17 +116,13 @@ class TransactionCreateFragment : Fragment() {
                 description = description
             )
 
-            viewModel.createNewTransaction(transaction)
-
-            activity?.finish() // Finishes the activity and goes back
         } catch (e: Exception) {
-            Snackbar.make(
-                requireContext(),
-                requireView(),
-                "Operation Failed, check that inputs are not empty and contains valid values.",
-                4000
-            ).show()
+            throw IOException(e)
         }
+    }
+
+    private fun insertIntoDatabase(transaction: Transaction) {
+        viewModel.createNewTransaction(transaction)
     }
 
     override fun onDestroyView() {
