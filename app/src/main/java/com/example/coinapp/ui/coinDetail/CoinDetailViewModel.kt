@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class CoinDetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private val coinRepository by lazy { CoinRepository.getInstance(application) }
+    private val transactionRepository by lazy { TransactionRepository.getInstance(application) }
 
     private val _coin = MutableLiveData<Coin>()
 
@@ -32,18 +33,23 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
+     * TODO CHECK FOR EXCEPTION
      * Creates a new transaction
      */
     fun createNewTransaction(transaction: Transaction) {
-        TransactionList.transactions.add(transaction)
+        viewModelScope.launch(Dispatchers.IO) {
+            transactionRepository.insertTransaction(transaction)
+        }
     }
 
     /**
+     * TODO CHECK FOR EXCEPTION
      * Updates [_transactions] LiveData field with sorted transactions from database
      */
-    fun updateTransactions() {
-        _transactions.value = TransactionList.transactions
-            .sortedByDescending { transaction -> transaction.date }
+    fun getTransactions() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _transactions.postValue(transactionRepository.getAllFromDatabase())
+        }
     }
 
     /**

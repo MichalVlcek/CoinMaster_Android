@@ -55,7 +55,7 @@ class CoinDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.updateTransactions()
+        viewModel.getTransactions()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

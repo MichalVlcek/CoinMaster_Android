@@ -1,6 +1,5 @@
 package com.example.coinapp.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.coinapp.data.Coin
 
@@ -10,10 +9,10 @@ interface CoinDao {
     fun getAll(): List<Coin>
 
     @Query("SELECT * FROM coin WHERE id IN (:ids)")
-    fun loadAllByIds(ids: IntArray): LiveData<List<Coin>>
+    fun loadAllByIds(ids: IntArray): List<Coin>
 
     @Query("SELECT * FROM coin WHERE id = :id")
-    fun loadById(id: Int): LiveData<Coin>
+    fun loadById(id: Int): Coin
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg coins: Coin)
