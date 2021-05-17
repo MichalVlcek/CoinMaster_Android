@@ -33,19 +33,6 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * Creates a new transaction
-     */
-    fun createNewTransaction(transaction: Transaction) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                transactionRepository.insertTransaction(transaction)
-            } catch (e: Exception) {
-                
-            }
-        }
-    }
-
-    /**
      * Updates [_transactions] LiveData field with sorted transactions from database
      */
     fun getTransactions() {

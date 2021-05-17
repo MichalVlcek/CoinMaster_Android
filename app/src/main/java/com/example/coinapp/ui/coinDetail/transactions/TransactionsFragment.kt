@@ -57,6 +57,7 @@ class TransactionsFragment : Fragment() {
 
     private fun openAddTransaction() {
         val intent = Intent(context, TransactionCreateActivity::class.java)
+        intent.putExtra(TransactionCreateActivity.COIN, viewModel.coin.value)
         startActivity(intent)
     }
 

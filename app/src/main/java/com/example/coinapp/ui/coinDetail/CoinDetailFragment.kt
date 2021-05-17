@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class CoinDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance(coin: Coin) =
+        fun newInstance(coin: Coin?) =
             CoinDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(CoinDetailActivity.COIN, coin)
