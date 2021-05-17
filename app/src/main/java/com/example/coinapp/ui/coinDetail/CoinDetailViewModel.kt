@@ -35,10 +35,10 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
     /**
      * Updates [_transactions] LiveData field with sorted transactions from database
      */
-    fun getTransactions() {
+    fun getTransactionsByCoinId(coinId: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _transactions.postValue(transactionRepository.getAllFromDatabase())
+                _transactions.postValue(transactionRepository.getTransactionsByCoinId(coinId!!))
             } catch (e: Exception) {
 
             }

@@ -29,9 +29,9 @@ class TransactionRepository(context: Context) {
     }
 
     @WorkerThread
-    suspend fun getAllFromDatabase(): List<Transaction> {
+    suspend fun getTransactionsByCoinId(coinId: String): List<Transaction> {
         return try {
-            transactionDao.getAll()
+            transactionDao.loadAllByCoin(coinId)
         } catch (e: Exception) {
             emptyList()
         }

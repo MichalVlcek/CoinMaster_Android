@@ -55,7 +55,7 @@ class CoinDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.getTransactions()
+        viewModel.getTransactionsByCoinId(coin?.id)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
