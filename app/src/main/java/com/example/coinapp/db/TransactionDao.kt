@@ -17,6 +17,9 @@ interface TransactionDao {
     @Query("SELECT * FROM `transaction` WHERE id = :id")
     fun loadById(id: Int): Transaction
 
+    @Update
+    fun updateTransaction(transaction: Transaction)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(vararg transactions: Transaction)
 

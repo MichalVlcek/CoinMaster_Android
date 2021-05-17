@@ -24,7 +24,12 @@ class TransactionRepository(context: Context) {
     }
 
     @WorkerThread
-    suspend fun deleteCoin(transaction: Transaction) {
+    suspend fun updateTransaction(transaction: Transaction) {
+        transactionDao.updateTransaction(transaction)
+    }
+
+    @WorkerThread
+    suspend fun deleteTransaction(transaction: Transaction) {
         transactionDao.delete(transaction)
     }
 

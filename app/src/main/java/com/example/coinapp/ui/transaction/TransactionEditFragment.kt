@@ -14,26 +14,29 @@ import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionType
-import com.example.coinapp.databinding.TransactionCreateFragmentBinding
+import com.example.coinapp.databinding.TransactionEditFragmentBinding
+import com.example.coinapp.databinding.TransactionFormFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.time.LocalDate
 
-class TransactionCreateFragment : Fragment() {
+class TransactionEditFragment : Fragment() {
 
     companion object {
-        fun newInstance(coin: Coin?) = TransactionCreateFragment().apply {
+        fun newInstance(coin: Coin?, transaction: Transaction?) = TransactionEditFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(TransactionManageActivity.COIN, coin)
+                putParcelable(TransactionManageActivity.TRANSACTION, transaction)
             }
         }
     }
 
     private var coin: Coin? = null
+    lateinit var transaction: Transaction
 
     private lateinit var viewModel: TransactionManageViewModel
 
-    private var _binding: TransactionCreateFragmentBinding? = null
+    private var _binding: TransactionEditFragmentBinding? = null
     private val binding
         get() = _binding!!
 
@@ -41,6 +44,7 @@ class TransactionCreateFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             coin = it.getParcelable(TransactionManageActivity.COIN)
+            transaction = it.getParcelable(TransactionManageActivity.TRANSACTION)!!
         }
     }
 
@@ -48,7 +52,7 @@ class TransactionCreateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = TransactionCreateFragmentBinding.inflate(inflater, container, false)
+        _binding = TransactionEditFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,11 +72,23 @@ class TransactionCreateFragment : Fragment() {
             typeSpinner.adapter = adapter
         }
 
-        val dateLabel = binding.form.transactionDate
-        dateLabel.text = LocalDate.now().toString()
-        form.transactionDate.setOnClickListener { showDatePickerDialog(dateLabel) }
+        bindData(form, transaction)
 
-        binding.transactionButtonAdd.setOnClickListener { addTransaction(coin?.id) }
+        form.transactionDate.setOnClickListener { showDatePickerDialog(form.transactionDate) }
+
+        binding.transactionUpdateButton.setOnClickListener { updateTransaction(form, coin?.id) }
+        binding.transactionDeleteButton.setOnClickListener { deleteTransaction(transaction) }
+    }
+
+    private fun bindData(form: TransactionFormFragmentBinding, transaction: Transaction) {
+        form.transactionType.setSelection(TransactionType.values().indexOf(transaction.type))
+        form.transactionPrice.setText(
+            ((transaction.cost - transaction.fee) / transaction.amount).toString() // TODO division by zero
+        )
+        form.transactionAmount.setText(transaction.amount.toString())
+        form.transactionFee.setText(transaction.fee.toString())
+        form.transactionDate.text = transaction.date.toString()
+        form.transactionDescription.setText(transaction.description)
     }
 
     private fun showDatePickerDialog(label: TextView) {
@@ -80,12 +96,12 @@ class TransactionCreateFragment : Fragment() {
         newFragment.show(parentFragmentManager, "datePicker")
     }
 
-    private fun addTransaction(coinId: String?) {
+    private fun updateTransaction(form: TransactionFormFragmentBinding, coinId: String?) {
         try {
-            val transaction = buildTransaction(coinId)
+            val transaction = buildTransaction(form, coinId)
             insertIntoDatabase(transaction)
 
-            activity?.finish() // Finishes the activity and goes back
+            requireActivity().finish() // Finishes the activity and goes back
         } catch (e: IOException) {
             Snackbar.make(
                 requireContext(),
@@ -103,9 +119,11 @@ class TransactionCreateFragment : Fragment() {
         }
     }
 
-    private fun buildTransaction(coinId: String?): Transaction {
+    private fun buildTransaction(
+        form: TransactionFormFragmentBinding,
+        coinId: String?
+    ): Transaction {
         //TODO implement Fee type
-        val form = binding.form
 
         try {
             val type = TransactionType.values()[form.transactionType.selectedItemPosition]
@@ -116,6 +134,7 @@ class TransactionCreateFragment : Fragment() {
             val description = form.transactionDescription.text.toString()
 
             return Transaction(
+                id = transaction.id,
                 coinId = coinId,
                 type = type,
                 date = date,
@@ -132,7 +151,12 @@ class TransactionCreateFragment : Fragment() {
     }
 
     private fun insertIntoDatabase(transaction: Transaction) {
-        viewModel.createNewTransaction(transaction)
+        viewModel.updateTransaction(transaction)
+    }
+
+    private fun deleteTransaction(transaction: Transaction) {
+        viewModel.deleteTransaction(transaction)
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

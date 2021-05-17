@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coinapp.TransactionCreateActivity
+import com.example.coinapp.TransactionManageActivity
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionsFragmentBinding
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
@@ -76,13 +76,16 @@ class TransactionsFragment : Fragment() {
     }
 
     private fun openAddTransaction() {
-        val intent = Intent(context, TransactionCreateActivity::class.java)
-        intent.putExtra(TransactionCreateActivity.COIN, viewModel.coin.value)
+        val intent = Intent(context, TransactionManageActivity::class.java)
+        intent.putExtra(TransactionManageActivity.COIN, viewModel.coin.value)
         startActivity(intent)
     }
 
     private fun openEditTransaction(transaction: Transaction) {
-
+        val intent = Intent(context, TransactionManageActivity::class.java)
+        intent.putExtra(TransactionManageActivity.COIN, viewModel.coin.value)
+        intent.putExtra(TransactionManageActivity.TRANSACTION, transaction)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
