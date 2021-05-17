@@ -36,7 +36,11 @@ class TransactionsFragment : Fragment() {
 
         val coin = viewModel.coin.value
 
-        listAdapter = TransactionsAdapter(binding.switcher, coin) { transaction ->
+        listAdapter = TransactionsAdapter(
+            binding.switcher,
+            binding.emptySwitcher,
+            coin
+        ) { transaction ->
             openEditTransaction(transaction)
         }
 
@@ -66,7 +70,7 @@ class TransactionsFragment : Fragment() {
         super.onResume()
         refreshData()
     }
-    
+
     private fun refreshData() {
         viewModel.getTransactionsByCoinId(viewModel.coin.value?.id)
     }

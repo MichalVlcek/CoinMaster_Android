@@ -43,7 +43,10 @@ class HomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
 
-        listAdapter = HomeScreenAdapter(binding.switcher) { coin -> adapterOnClick(coin) }
+        listAdapter = HomeScreenAdapter(
+            binding.switcher,
+            binding.emptySwitcher
+        ) { coin -> adapterOnClick(coin) }
 
         binding.watchedCoinsList.apply {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
@@ -90,6 +93,17 @@ class HomeScreenFragment : Fragment() {
 
     private fun updateData() {
         viewModel.updateData()
+//        lifecycleScope.launch(CoroutineExceptionHandler { _, _ -> }) {
+//            val request = lifecycleScope.async {
+//            }
+//            request.await()
+//
+//            if (viewModel.items.value?.isEmpty() == true
+//                && binding.emptySwitcher.currentView.id != R.id.no_coins
+//            ) {
+//                binding.emptySwitcher.showNext()
+//            }
+//    }
     }
 
     private fun openAddCoinActivity() {

@@ -14,21 +14,20 @@ import com.example.coinapp.helper.TextViewOperations.setTextAndColor
 
 class TransactionsAdapter(
     private val switcher: ViewSwitcher,
+    private val emptySwitcher: ViewSwitcher,
     private val coin: Coin?,
     private val onClick: (Transaction) -> Unit
 ) : RecyclerView.Adapter<TransactionsAdapter.ViewHolder>() {
 
+    private var firstRefresh = true // used only as workaround for view switching
+
     var transactions = listOf<Transaction>()
         set(value) {
+            handleViewSwitching(transactions, value)
+
+            firstRefresh = false
             field = value
             notifyDataSetChanged()
-            if (value.isEmpty()) {
-                if (switcher.currentView.id != R.id.loadingBar) {
-                    switcher.showNext()
-                }
-            } else if (switcher.currentView.id != R.id.transactionsList) {
-                switcher.showNext()
-            }
         }
 
     class ViewHolder(
@@ -78,4 +77,25 @@ class TransactionsAdapter(
     }
 
     override fun getItemCount(): Int = transactions.size
+
+    private fun handleViewSwitching(oldValue: List<Transaction>, newValue: List<Transaction>) {
+        if (newValue.isEmpty()) {
+            if (switcher.currentView.id != R.id.empty_switcher) {
+                switcher.showNext()
+            }
+
+            if (
+                (emptySwitcher.currentView.id != R.id.no_transactions
+                        && !firstRefresh && oldValue.isEmpty())
+                ||
+                (emptySwitcher.currentView.id != R.id.loadingBar
+                        && (firstRefresh || oldValue.isNotEmpty()))
+            ) {
+                emptySwitcher.showNext()
+            }
+
+        } else if (switcher.currentView.id != R.id.transactionsList) {
+            switcher.showNext()
+        }
+    }
 }

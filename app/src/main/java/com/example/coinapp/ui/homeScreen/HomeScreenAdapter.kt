@@ -10,20 +10,22 @@ import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
 import com.example.coinapp.helper.StringOperations
 
-class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick: (Coin) -> Unit) :
+class HomeScreenAdapter(
+    private val switcher: ViewSwitcher,
+    private val emptySwitcher: ViewSwitcher,
+    private val onClick: (Coin) -> Unit
+) :
     RecyclerView.Adapter<HomeScreenAdapter.ViewHolder>() {
+
+    private var firstRefresh = true // used only for switching of views in emptySwitcher
 
     var coins = listOf<Coin>()
         set(value) {
+            handleViewSwitching(coins, value)
+
+            firstRefresh = false
             field = value
             notifyDataSetChanged()
-            if (value.isEmpty()) {
-                if (switcher.currentView.id != R.id.loadingBar) {
-                    switcher.showNext()
-                }
-            } else if (switcher.currentView.id != R.id.watchedCoinsList) {
-                switcher.showNext()
-            }
         }
 
     class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
@@ -57,4 +59,25 @@ class HomeScreenAdapter(private val switcher: ViewSwitcher, private val onClick:
     }
 
     override fun getItemCount(): Int = coins.count()
+
+    private fun handleViewSwitching(oldValue: List<Coin>, newValue: List<Coin>) {
+        if (newValue.isEmpty()) {
+            if (switcher.currentView.id != R.id.empty_switcher) {
+                switcher.showNext()
+            }
+
+            if (
+                (emptySwitcher.currentView.id != R.id.no_transactions
+                        && !firstRefresh && oldValue.isEmpty())
+                ||
+                (emptySwitcher.currentView.id != R.id.loadingBar
+                        && (firstRefresh || oldValue.isNotEmpty()))
+            ) {
+                emptySwitcher.showNext()
+            }
+
+        } else if (switcher.currentView.id != R.id.watchedCoinsList) {
+            switcher.showNext()
+        }
+    }
 }
