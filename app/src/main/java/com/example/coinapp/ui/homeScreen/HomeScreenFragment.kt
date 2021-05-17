@@ -1,12 +1,12 @@
 package com.example.coinapp.ui.homeScreen
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.AddCoinActivity
@@ -20,6 +20,8 @@ class HomeScreenFragment : Fragment() {
     companion object {
         fun newInstance() = HomeScreenFragment()
     }
+
+    private var firstVisit = true // Used as workaround for missing onRestart() in fragments
 
     private lateinit var listAdapter: HomeScreenAdapter
     private lateinit var viewModel: HomeScreenViewModel
@@ -41,11 +43,21 @@ class HomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
 
-        listAdapter = HomeScreenAdapter(binding.switcher) { coin -> adapterOnClick(coin) }
+        listAdapter = HomeScreenAdapter(
+            binding.switcher,
+            binding.emptySwitcher
+        ) { coin -> adapterOnClick(coin) }
 
         binding.watchedCoinsList.apply {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             adapter = listAdapter
+        }
+
+        val swipeContainer = binding.swipeContainer
+        binding.swipeContainer.setOnRefreshListener {
+            viewModel.clearData()
+            updateData()
+            swipeContainer.isRefreshing = false
         }
 
         viewModel.items.observe(
@@ -56,12 +68,42 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.fab.setOnClickListener { openAddCoinActivity() }
+
+        updateData()
     }
+
 
     override fun onResume() {
         super.onResume()
 
+        if (!firstVisit) {
+            getData()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        firstVisit = false
+    }
+
+    private fun getData() {
+        viewModel.getData()
+    }
+
+    private fun updateData() {
         viewModel.updateData()
+//        lifecycleScope.launch(CoroutineExceptionHandler { _, _ -> }) {
+//            val request = lifecycleScope.async {
+//            }
+//            request.await()
+//
+//            if (viewModel.items.value?.isEmpty() == true
+//                && binding.emptySwitcher.currentView.id != R.id.no_coins
+//            ) {
+//                binding.emptySwitcher.showNext()
+//            }
+//    }
     }
 
     private fun openAddCoinActivity() {

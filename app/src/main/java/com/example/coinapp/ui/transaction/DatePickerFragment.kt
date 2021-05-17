@@ -17,7 +17,7 @@ class DatePickerFragment(
         // Use the current date as the default date in the picker
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
+        val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         // Create a new instance of DatePickerDialog and return it
@@ -25,6 +25,6 @@ class DatePickerFragment(
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        label.text = LocalDate.of(year, month, dayOfMonth).toString()
+        label.text = LocalDate.of(year, month + 1, dayOfMonth).toString()
     }
 }

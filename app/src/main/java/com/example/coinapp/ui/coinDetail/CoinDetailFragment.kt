@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class CoinDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance(coin: Coin) =
+        fun newInstance(coin: Coin?) =
             CoinDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(CoinDetailActivity.COIN, coin)
@@ -55,7 +55,7 @@ class CoinDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.updateTransactions()
+        refreshData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +75,10 @@ class CoinDetailFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getString(TAB_TITLES[position])
         }.attach()
+    }
+
+    private fun refreshData() {
+        viewModel.getTransactionsByCoinId(coin?.id)
     }
 
     override fun onDestroyView() {

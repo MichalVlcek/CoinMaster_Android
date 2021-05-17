@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.data.Coin
-import com.example.coinapp.data.CoinList
 import com.example.coinapp.databinding.AddCoinFragmentBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class AddCoinFragment : Fragment() {
 
@@ -50,7 +52,7 @@ class AddCoinFragment : Fragment() {
         binding.swipeContainer.setOnRefreshListener {
             viewModel.clearItems()
             refreshData()
-            swipeContainer.isRefreshing = false // TODO animation disappears immediately: FIX
+            swipeContainer.isRefreshing = false
         }
 
         viewModel.items.observe(
@@ -63,14 +65,42 @@ class AddCoinFragment : Fragment() {
         refreshData()
     }
 
+    /**
+     * Adds [coin] to database and ends this activity
+     */
     private fun adapterOnClick(coin: Coin) {
-        //TODO coin adding to viewModel
-        CoinList.coins.add(coin) //TODO update this by using database
-        requireActivity().finish()
+        lifecycleScope.launch {
+            try {
+                viewModel.addCoin(coin)
+                requireActivity().finish()
+            } catch (e: Exception) {
+                Snackbar.make(
+                    requireContext(),
+                    requireView(),
+                    "Something bad happened, can't add coin.",
+                    4000
+                ).show()
+            }
+        }
     }
 
+    /**
+     * Calls function from viewModel to refresh data
+     * When Exception is caught, SnackBar is shown
+     */
     private fun refreshData() {
-        viewModel.fetchData()
+        lifecycleScope.launch {
+            try {
+                viewModel.fetchData()
+            } catch (e: Exception) {
+                Snackbar.make(
+                    requireContext(),
+                    requireView(),
+                    "Data loading failed, check your internet connection.",
+                    4000
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

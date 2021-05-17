@@ -1,11 +1,18 @@
 package com.example.coinapp.ui.coinDetail
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.coinapp.data.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class CoinDetailViewModel : ViewModel() {
+class CoinDetailViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val coinRepository by lazy { CoinRepository.getInstance(application) }
+    private val transactionRepository by lazy { TransactionRepository.getInstance(application) }
 
     private val _coin = MutableLiveData<Coin>()
 
@@ -19,19 +26,10 @@ class CoinDetailViewModel : ViewModel() {
     val coin: LiveData<Coin>
         get() = _coin
 
-    /**
-     * Creates a new transaction
-     */
-    fun createNewTransaction(transaction: Transaction) {
-        TransactionList.transactions.add(transaction)
-    }
-
-    /**
-     * Updates [_transactions] LiveData field with sorted transactions from database
-     */
-    fun updateTransactions() {
-        _transactions.value = TransactionList.transactions
-            .sortedByDescending { transaction -> transaction.date }
+    fun unwatchCoin() {
+        viewModelScope.launch(Dispatchers.IO) {
+            coin.value?.let { coinRepository.deleteCoin(it) }
+        }
     }
 
     /**
@@ -39,6 +37,23 @@ class CoinDetailViewModel : ViewModel() {
      */
     fun setCoin(newCoin: Coin) {
         _coin.value = newCoin
+    }
+
+    fun clearTransactions() {
+        _transactions.value = emptyList()
+    }
+
+    /**
+     * Updates [_transactions] LiveData field with sorted transactions from database
+     */
+    fun getTransactionsByCoinId(coinId: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _transactions.postValue(transactionRepository.getTransactionsByCoinId(coinId!!))
+            } catch (e: Exception) {
+
+            }
+        }
     }
 
     /**

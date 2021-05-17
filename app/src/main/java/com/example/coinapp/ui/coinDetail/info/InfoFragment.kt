@@ -1,11 +1,13 @@
 package com.example.coinapp.ui.coinDetail.info
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.coinapp.TransactionCreateActivity
 import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
 import com.example.coinapp.helper.StringOperations
@@ -39,10 +41,27 @@ class InfoFragment : Fragment() {
             }
         )
 
+        binding.unwatchButton.setOnClickListener { unwatchCoin() }
+        binding.infoAddTransactionButton.setOnClickListener { openAddTransaction() }
     }
 
+    private fun unwatchCoin() {
+        viewModel.unwatchCoin()
+        requireActivity().finish()
+    }
+
+    private fun openAddTransaction() {
+        val intent = Intent(context, TransactionCreateActivity::class.java)
+        intent.putExtra(TransactionCreateActivity.COIN, viewModel.coin.value)
+        startActivity(intent)
+    }
+
+    /**
+     * Binds data to TextViews on screen
+     */
     private fun bindData(coin: Coin?) {
         coin?.let {
+            // Holdings info
             binding.holdings.text = StringOperations.formatCurrency(viewModel.countHoldings(), coin)
             binding.value.text = StringOperations.formatCurrency(viewModel.countHoldingsValue())
             binding.buyPrice.text =
@@ -61,7 +80,7 @@ class InfoFragment : Fragment() {
                 profitLoss
             )
 
-            //Coin info
+            // Coin info
             binding.rank.text = StringOperations.formatRank(it.rank)
             binding.price.text = StringOperations.formatCurrency(it.price)
             binding.marketCap.text = StringOperations.formatCurrency(it.marketCap)

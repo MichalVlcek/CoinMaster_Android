@@ -46,6 +46,8 @@
     <string name="unwatch">Unwatch</string>
     <string name="delete">Delete</string>
     <string name="update">Update</string>
+    <string name="no_coins">You don\'t have any coins in the watch list at the moment</string>
+    <string name="no_transactions">You don\'t have any transactions at the moment</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">

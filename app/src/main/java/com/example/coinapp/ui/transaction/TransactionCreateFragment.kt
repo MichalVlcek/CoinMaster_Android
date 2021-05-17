@@ -8,27 +8,41 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionType
 import com.example.coinapp.databinding.TransactionCreateFragmentBinding
-import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 import java.time.LocalDate
 
 class TransactionCreateFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TransactionCreateFragment()
+        fun newInstance(coin: Coin?) = TransactionCreateFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(CoinDetailActivity.COIN, coin)
+            }
+        }
     }
 
-    private lateinit var viewModel: CoinDetailViewModel
+    private var coin: Coin? = null
+
+    private lateinit var viewModel: TransactionCreateViewModel
 
     private var _binding: TransactionCreateFragmentBinding? = null
     private val binding
         get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            coin = it.getParcelable(CoinDetailActivity.COIN)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +54,7 @@ class TransactionCreateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CoinDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TransactionCreateViewModel::class.java)
         val form = binding.form
 
         val typeSpinner = form.transactionType
@@ -58,9 +72,7 @@ class TransactionCreateFragment : Fragment() {
         dateLabel.text = LocalDate.now().toString()
         form.transactionDate.setOnClickListener { showDatePickerDialog(dateLabel) }
 
-        val coin = viewModel.coin.value
-
-        binding.transactionButtonAdd.setOnClickListener { addTransaction(coin) }
+        binding.transactionButtonAdd.setOnClickListener { addTransaction(coin?.id) }
     }
 
     private fun showDatePickerDialog(label: TextView) {
@@ -68,8 +80,31 @@ class TransactionCreateFragment : Fragment() {
         newFragment.show(parentFragmentManager, "datePicker")
     }
 
-    private fun addTransaction(coin: Coin?) {
-        //TODO implement FEE type
+    private fun addTransaction(coinId: String?) {
+        try {
+            val transaction = buildTransaction(coinId)
+            insertIntoDatabase(transaction)
+
+            activity?.finish() // Finishes the activity and goes back
+        } catch (e: IOException) {
+            Snackbar.make(
+                requireContext(),
+                requireView(),
+                "Operation Failed, check that inputs are not empty and contains valid values.",
+                4000
+            ).show()
+        } catch (e: Exception) {
+            Snackbar.make(
+                requireContext(),
+                requireView(),
+                "Operation Failed from unknown reasons.",
+                4000
+            ).show()
+        }
+    }
+
+    private fun buildTransaction(coinId: String?): Transaction {
+        //TODO implement Fee type
         val form = binding.form
 
         try {
@@ -80,28 +115,24 @@ class TransactionCreateFragment : Fragment() {
             val date = LocalDate.parse(form.transactionDate.text)
             val description = form.transactionDescription.text.toString()
 
-            val transaction = Transaction(
-                coin,
-                type,
-                date,
-                coinPrice * amount + fee,
-                amount,
-                fee,
-                FeeType.DOLLAR,
-                description
+            return Transaction(
+                coinId = coinId,
+                type = type,
+                date = date,
+                cost = coinPrice * amount + fee,
+                amount = amount,
+                fee = fee,
+                feeType = FeeType.DOLLAR,
+                description = description
             )
 
-            viewModel.createNewTransaction(transaction)
-
-            activity?.finish() // Finishes the activity and goes back
         } catch (e: Exception) {
-            Snackbar.make(
-                requireContext(),
-                requireView(),
-                "Operation Failed, check that inputs are not empty and contains valid values.",
-                4000
-            ).show()
+            throw IOException(e)
         }
+    }
+
+    private fun insertIntoDatabase(transaction: Transaction) {
+        viewModel.createNewTransaction(transaction)
     }
 
     override fun onDestroyView() {

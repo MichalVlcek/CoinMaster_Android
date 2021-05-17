@@ -36,13 +36,24 @@ class TransactionsFragment : Fragment() {
 
         val coin = viewModel.coin.value
 
-        listAdapter = TransactionsAdapter(binding.switcher, coin) { transaction ->
+        listAdapter = TransactionsAdapter(
+            binding.switcher,
+            binding.emptySwitcher,
+            coin
+        ) { transaction ->
             openEditTransaction(transaction)
         }
 
         binding.transactionsList.apply {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             adapter = listAdapter
+        }
+
+        val swipeContainer = binding.swipeContainer
+        binding.swipeContainer.setOnRefreshListener {
+            viewModel.clearTransactions()
+            refreshData()
+            swipeContainer.isRefreshing = false
         }
 
         viewModel.transactions.observe(
@@ -55,8 +66,18 @@ class TransactionsFragment : Fragment() {
         binding.addTransactionButton.setOnClickListener { openAddTransaction() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshData()
+    }
+
+    private fun refreshData() {
+        viewModel.getTransactionsByCoinId(viewModel.coin.value?.id)
+    }
+
     private fun openAddTransaction() {
         val intent = Intent(context, TransactionCreateActivity::class.java)
+        intent.putExtra(TransactionCreateActivity.COIN, viewModel.coin.value)
         startActivity(intent)
     }
 
