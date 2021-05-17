@@ -55,7 +55,7 @@ class CoinDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.getTransactionsByCoinId(coin?.id)
+        refreshData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +75,10 @@ class CoinDetailFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getString(TAB_TITLES[position])
         }.attach()
+    }
+
+    private fun refreshData() {
+        viewModel.getTransactionsByCoinId(coin?.id)
     }
 
     override fun onDestroyView() {

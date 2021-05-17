@@ -39,6 +39,10 @@ class CoinDetailViewModel(application: Application) : AndroidViewModel(applicati
         _coin.value = newCoin
     }
 
+    fun clearTransactions() {
+        _transactions.value = emptyList()
+    }
+
     /**
      * Updates [_transactions] LiveData field with sorted transactions from database
      */

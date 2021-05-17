@@ -45,6 +45,13 @@ class TransactionsFragment : Fragment() {
             adapter = listAdapter
         }
 
+        val swipeContainer = binding.swipeContainer
+        binding.swipeContainer.setOnRefreshListener {
+            viewModel.clearTransactions()
+            refreshData()
+            swipeContainer.isRefreshing = false
+        }
+
         viewModel.transactions.observe(
             viewLifecycleOwner,
             {
@@ -53,6 +60,15 @@ class TransactionsFragment : Fragment() {
         )
 
         binding.addTransactionButton.setOnClickListener { openAddTransaction() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshData()
+    }
+    
+    private fun refreshData() {
+        viewModel.getTransactionsByCoinId(viewModel.coin.value?.id)
     }
 
     private fun openAddTransaction() {
