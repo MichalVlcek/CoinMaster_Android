@@ -53,6 +53,7 @@
         android:text="@string/coin_holdings_placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/grey"
         android:textSize="@dimen/small_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

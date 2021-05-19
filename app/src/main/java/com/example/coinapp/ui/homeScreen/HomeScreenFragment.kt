@@ -55,15 +55,22 @@ class HomeScreenFragment : Fragment() {
 
         val swipeContainer = binding.swipeContainer
         binding.swipeContainer.setOnRefreshListener {
-            viewModel.clearData()
+            viewModel.clearCoinList()
             updateData()
             swipeContainer.isRefreshing = false
         }
 
-        viewModel.items.observe(
+        viewModel.coins.observe(
             viewLifecycleOwner,
             {
                 listAdapter.coins = it
+            }
+        )
+
+        viewModel.transactions.observe(
+            viewLifecycleOwner,
+            {
+                listAdapter.transactions = it
             }
         )
 
@@ -88,22 +95,13 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun getData() {
-        viewModel.getData()
+        viewModel.getCoinsFromDB()
+        viewModel.getTransactions()
     }
 
     private fun updateData() {
-        viewModel.updateData()
-//        lifecycleScope.launch(CoroutineExceptionHandler { _, _ -> }) {
-//            val request = lifecycleScope.async {
-//            }
-//            request.await()
-//
-//            if (viewModel.items.value?.isEmpty() == true
-//                && binding.emptySwitcher.currentView.id != R.id.no_coins
-//            ) {
-//                binding.emptySwitcher.showNext()
-//            }
-//    }
+        viewModel.updateCoins()
+        viewModel.getTransactions()
     }
 
     private fun openAddCoinActivity() {
