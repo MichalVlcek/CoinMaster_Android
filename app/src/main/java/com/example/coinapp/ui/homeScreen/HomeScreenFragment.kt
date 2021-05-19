@@ -13,7 +13,10 @@ import com.example.coinapp.AddCoinActivity
 import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.CoinDetailActivity.Companion.COIN
 import com.example.coinapp.data.Coin
+import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
+import com.example.coinapp.helper.CoinUtility
+import com.example.coinapp.helper.StringOperations
 
 class HomeScreenFragment : Fragment() {
 
@@ -21,7 +24,7 @@ class HomeScreenFragment : Fragment() {
         fun newInstance() = HomeScreenFragment()
     }
 
-    private var firstVisit = true // Used as workaround for missing onRestart() in fragments
+    private var firstVisit = false // Used as workaround for missing onRestart() in fragments
 
     private lateinit var listAdapter: HomeScreenAdapter
     private lateinit var viewModel: HomeScreenViewModel
@@ -55,20 +58,30 @@ class HomeScreenFragment : Fragment() {
 
         val swipeContainer = binding.swipeContainer
         binding.swipeContainer.setOnRefreshListener {
-            viewModel.clearData()
+            viewModel.clearCoinList()
             updateData()
             swipeContainer.isRefreshing = false
         }
 
-        viewModel.items.observe(
+        viewModel.coins.observe(
             viewLifecycleOwner,
             {
                 listAdapter.coins = it
+                bindDataToOverview(viewModel.transactions.value, it)
+            }
+        )
+
+        viewModel.transactions.observe(
+            viewLifecycleOwner,
+            {
+                listAdapter.transactions = it
+                bindDataToOverview(it, viewModel.coins.value)
             }
         )
 
         binding.fab.setOnClickListener { openAddCoinActivity() }
 
+        firstVisit = true
         updateData()
     }
 
@@ -87,23 +100,19 @@ class HomeScreenFragment : Fragment() {
         firstVisit = false
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun getData() {
-        viewModel.getData()
+        viewModel.getCoinsFromDB()
+        viewModel.getTransactions()
     }
 
     private fun updateData() {
-        viewModel.updateData()
-//        lifecycleScope.launch(CoroutineExceptionHandler { _, _ -> }) {
-//            val request = lifecycleScope.async {
-//            }
-//            request.await()
-//
-//            if (viewModel.items.value?.isEmpty() == true
-//                && binding.emptySwitcher.currentView.id != R.id.no_coins
-//            ) {
-//                binding.emptySwitcher.showNext()
-//            }
-//    }
+        viewModel.updateCoins()
+        viewModel.getTransactions()
     }
 
     private fun openAddCoinActivity() {
@@ -117,8 +126,13 @@ class HomeScreenFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun bindDataToOverview(transactions: List<Transaction>?, coins: List<Coin>?) {
+        val totalHoldings =
+            coins?.map { coin ->
+                CoinUtility.countHoldingsValue(transactions?.filter { t ->
+                    t.coinId == coin.id
+                } ?: emptyList(), coin)
+            }?.sum()
+        binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings ?: 0.0)
     }
 }

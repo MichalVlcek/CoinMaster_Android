@@ -18,7 +18,6 @@
         <item name="android:textColorHint">@color/grey</item>
         <item name="android:background">@drawable/edittext_border</item>
         <item name="android:padding">8dp</item>
-        <item name="android:backgroundTint">@color/background_color_light</item>
         <item name="android:backgroundTintMode">screen</item>
     </style>
 
@@ -29,5 +28,13 @@
     <style name="HeadingTextViewMuted" parent="HeadingTextView">
         <item name="android:textSize">@dimen/big_text</item>
         <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="IntervalRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:gravity">center</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:background">@drawable/radio_flat_selector</item>
+        <item name="android:textColor">@drawable/radio_flat_text_selector</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -7,31 +7,44 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.CoinRepository
+import com.example.coinapp.data.Transaction
+import com.example.coinapp.data.TransactionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeScreenViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository by lazy { CoinRepository.getInstance(application) }
+    private val coinRepository by lazy { CoinRepository.getInstance(application) }
+    private val transactionRepository by lazy { TransactionRepository.getInstance(application) }
 
-    private val _items = MutableLiveData<List<Coin>>().apply { value = emptyList() }
+    private val _coins = MutableLiveData<List<Coin>>().apply { value = emptyList() }
+    private val _transactions = MutableLiveData<List<Transaction>>().apply { value = emptyList() }
 
-    val items: LiveData<List<Coin>>
-        get() = _items
+    val coins: LiveData<List<Coin>>
+        get() = _coins
 
-    fun getData() {
+    val transactions: LiveData<List<Transaction>>
+        get() = _transactions
+
+    fun getTransactions() {
         viewModelScope.launch(Dispatchers.IO) {
-            _items.postValue(repository.getAllFromDatabase())
+            _transactions.postValue(transactionRepository.getAllTransactions())
         }
     }
 
-    fun updateData() {
+    fun getCoinsFromDB() {
         viewModelScope.launch(Dispatchers.IO) {
-            _items.postValue(repository.loadCoins())
+            _coins.postValue(coinRepository.getAllFromDatabase())
         }
     }
 
-    fun clearData() {
-        _items.value = emptyList()
+    fun updateCoins() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _coins.postValue(coinRepository.loadCoins())
+        }
+    }
+
+    fun clearCoinList() {
+        _coins.value = emptyList()
     }
 }

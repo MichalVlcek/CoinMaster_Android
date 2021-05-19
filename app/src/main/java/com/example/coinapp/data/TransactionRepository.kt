@@ -34,6 +34,11 @@ class TransactionRepository(context: Context) {
     }
 
     @WorkerThread
+    suspend fun getAllTransactions(): List<Transaction> {
+        return transactionDao.getAll()
+    }
+
+    @WorkerThread
     suspend fun getTransactionsByCoinId(coinId: String): List<Transaction> {
         return try {
             transactionDao.loadAllByCoin(coinId)

@@ -5,11 +5,12 @@ import androidx.core.content.ContextCompat.getColor
 import com.example.coinapp.R
 import com.example.coinapp.data.TransactionType
 
-const val red = R.color.red
-const val green = R.color.green
-const val blue = R.color.lightBlue
 
 object TextViewOperations {
+    private const val red = R.color.red
+    private const val green = R.color.green
+    private const val blue = R.color.lightBlue
+    
     fun TextView.setTextAndColor(text: String, value: Double) {
         this.text = text
 

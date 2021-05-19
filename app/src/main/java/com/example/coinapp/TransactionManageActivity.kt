@@ -18,6 +18,8 @@ class TransactionManageActivity : AppCompatActivity() {
         val coin = intent.extras?.getParcelable<Coin>(COIN)
         val transaction = intent.extras?.getParcelable<Transaction>(TRANSACTION)
 
+        supportActionBar?.title = coin?.name
+        
         if (savedInstanceState == null) {
             if (transaction == null) {
                 supportFragmentManager.beginTransaction()

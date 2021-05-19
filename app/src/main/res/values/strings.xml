@@ -15,6 +15,7 @@
     <string name="title_activity_coin_detail">CoinDetailActivity</string>
     <string name="coin_info">Coin Info</string>
     <string name="transactions">Transactions</string>
+
     <!-- COIN INFO STRINGS -->
     <string name="holdings">Holdings:</string>
     <string name="zero">0</string>
@@ -48,6 +49,20 @@
     <string name="update">Update</string>
     <string name="no_coins">You don\'t have any coins in the watch list at the moment</string>
     <string name="no_transactions">You don\'t have any transactions at the moment</string>
+
+    <!--    VALUES OF HOME SCREEN OVERVIEW-->
+    <string name="total_holdings_heading">Total Holdings:</string>
+    <string name="value_placeholder">5 000$</string>
+    <string name="high_heading">7 day high:</string>
+    <string name="change_heading">7 Day Change:</string>
+    <string name="change_value_placeholder">+ 500$</string>
+    <string name="change_percentage_placeholder">+ 50%</string>
+    <string name="low_heading">7 day low:</string>
+    <string name="_1d">1d</string>
+    <string name="_7d">7d</string>
+    <string name="_30d">30d</string>
+    <string name="_90d">90d</string>
+    <string name="_1y">1y</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">

@@ -8,48 +8,200 @@
     android:padding="@dimen/basic_padding"
     tools:context=".ui.homeScreen.HomeScreenFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ViewSwitcher
-            android:id="@+id/switcher"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:padding="@dimen/double_padding"
+            android:background="@drawable/edittext_border">
+
+            <TextView
+                android:id="@+id/total_holdings_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_holdings_heading"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/total_holdings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/value_placeholder"
+                style="@style/HeadingTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_holdings_heading" />
+
+            <TextView
+                android:id="@+id/high_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/high_heading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/value_placeholder"
+                style="@style/HeadingTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/high_heading" />
+
+            <TextView
+                android:id="@+id/change_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/change_heading"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_holdings" />
+
+            <TextView
+                android:id="@+id/change_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/HeadingTextView"
+                android:text="@string/change_value_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/change_heading" />
+
+            <TextView
+                android:id="@+id/change_percentage"
+                style="@style/HeadingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/change_percentage_placeholder"
+                app:layout_constraintStart_toEndOf="@+id/change_value"
+                app:layout_constraintTop_toBottomOf="@+id/change_heading" />
+
+            <TextView
+                android:id="@+id/low_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/low_heading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/high" />
+
+            <TextView
+                android:id="@+id/low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/HeadingTextView"
+                android:text="@string/value_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/low_heading" />
+
+            <RadioGroup
+                android:id="@+id/interval_button_group"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_group_background"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radio_1d"
+                    style="@style/IntervalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_1d" />
+
+                <RadioButton
+                    android:id="@+id/radio_7d"
+                    style="@style/IntervalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/_7d" />
+
+                <RadioButton
+                    android:id="@+id/radio_30d"
+                    style="@style/IntervalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_30d" />
+
+                <RadioButton
+                    android:id="@+id/radio_90d"
+                    style="@style/IntervalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_90d" />
+
+                <RadioButton
+                    android:id="@+id/radio_1y"
+                    style="@style/IntervalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_1y" />
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ViewSwitcher
-                android:id="@+id/empty_switcher"
+                android:id="@+id/switcher"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ProgressBar
-                    android:id="@+id/loadingBar"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:id="@+id/no_transactions"
+                <ViewSwitcher
+                    android:id="@+id/empty_switcher"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="@string/no_coins"
-                    android:textColor="@color/orange"
-                    style="@style/HeadingTextView" />
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:id="@+id/loadingBar"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/no_transactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="@string/no_coins"
+                        android:textColor="@color/orange"
+                        style="@style/HeadingTextView" />
+
+                </ViewSwitcher>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watchedCoinsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </ViewSwitcher>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/watchedCoinsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </ViewSwitcher>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
