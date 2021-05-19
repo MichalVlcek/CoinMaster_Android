@@ -18,7 +18,6 @@
         <item name="android:textColorHint">@color/grey</item>
         <item name="android:background">@drawable/edittext_border</item>
         <item name="android:padding">8dp</item>
-        <item name="android:backgroundTint">@color/background_color_light</item>
         <item name="android:backgroundTintMode">screen</item>
     </style>
 

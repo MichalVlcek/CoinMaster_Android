@@ -8,48 +8,65 @@
     android:padding="@dimen/basic_padding"
     tools:context=".ui.homeScreen.HomeScreenFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ViewSwitcher
-            android:id="@+id/switcher"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/edittext_border">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ViewSwitcher
-                android:id="@+id/empty_switcher"
+                android:id="@+id/switcher"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ProgressBar
-                    android:id="@+id/loadingBar"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:id="@+id/no_transactions"
+                <ViewSwitcher
+                    android:id="@+id/empty_switcher"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="@string/no_coins"
-                    android:textColor="@color/orange"
-                    style="@style/HeadingTextView" />
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:id="@+id/loadingBar"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/no_transactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="@string/no_coins"
+                        android:textColor="@color/orange"
+                        style="@style/HeadingTextView" />
+                </ViewSwitcher>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watchedCoinsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </ViewSwitcher>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/watchedCoinsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </ViewSwitcher>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
