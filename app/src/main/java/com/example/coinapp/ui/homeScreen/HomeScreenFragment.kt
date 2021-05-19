@@ -13,7 +13,10 @@ import com.example.coinapp.AddCoinActivity
 import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.CoinDetailActivity.Companion.COIN
 import com.example.coinapp.data.Coin
+import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
+import com.example.coinapp.helper.CoinUtility
+import com.example.coinapp.helper.StringOperations
 
 class HomeScreenFragment : Fragment() {
 
@@ -64,6 +67,7 @@ class HomeScreenFragment : Fragment() {
             viewLifecycleOwner,
             {
                 listAdapter.coins = it
+                bindDataToOverview(viewModel.transactions.value, it)
             }
         )
 
@@ -71,6 +75,7 @@ class HomeScreenFragment : Fragment() {
             viewLifecycleOwner,
             {
                 listAdapter.transactions = it
+                bindDataToOverview(it, viewModel.coins.value)
             }
         )
 
@@ -94,6 +99,11 @@ class HomeScreenFragment : Fragment() {
         firstVisit = false
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun getData() {
         viewModel.getCoinsFromDB()
         viewModel.getTransactions()
@@ -115,8 +125,13 @@ class HomeScreenFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun bindDataToOverview(transactions: List<Transaction>?, coins: List<Coin>?) {
+        val totalHoldings =
+            coins?.map { coin ->
+                CoinUtility.countHoldingsValue(transactions?.filter { t ->
+                    t.coinId == coin.id
+                } ?: emptyList(), coin)
+            }?.sum()
+        binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings ?: 0.0)
     }
 }
