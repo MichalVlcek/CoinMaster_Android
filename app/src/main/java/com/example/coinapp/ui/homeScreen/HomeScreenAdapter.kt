@@ -39,8 +39,6 @@ class HomeScreenAdapter(
         set(value) {
             field = value
             notifyDataSetChanged()
-
-            coins = coins
         }
 
     class ViewHolder(itemBinding: HomeWatchedCoinItemBinding, val onClick: (Coin) -> Unit) :
@@ -99,14 +97,17 @@ class HomeScreenAdapter(
                 switcher.showNext()
             }
 
-            if (
-                (emptySwitcher.currentView.id != R.id.no_transactions
-                        && !firstRefresh && oldValue.isEmpty())
-                ||
-                (emptySwitcher.currentView.id != R.id.loadingBar
-                        && (firstRefresh || oldValue.isNotEmpty()))
+            if (emptySwitcher.currentView.id != R.id.no_transactions
+                && !firstRefresh && oldValue.isEmpty()
             ) {
                 emptySwitcher.showNext()
+
+            }
+            if (emptySwitcher.currentView.id != R.id.loadingBar
+                && (firstRefresh || oldValue.isNotEmpty())
+            ) {
+                emptySwitcher.showNext()
+
             }
 
         } else if (switcher.currentView.id != R.id.watchedCoinsList) {

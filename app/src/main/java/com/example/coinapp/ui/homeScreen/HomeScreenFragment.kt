@@ -24,7 +24,7 @@ class HomeScreenFragment : Fragment() {
         fun newInstance() = HomeScreenFragment()
     }
 
-    private var firstVisit = true // Used as workaround for missing onRestart() in fragments
+    private var firstVisit = false // Used as workaround for missing onRestart() in fragments
 
     private lateinit var listAdapter: HomeScreenAdapter
     private lateinit var viewModel: HomeScreenViewModel
@@ -81,6 +81,7 @@ class HomeScreenFragment : Fragment() {
 
         binding.fab.setOnClickListener { openAddCoinActivity() }
 
+        firstVisit = true
         updateData()
     }
 
