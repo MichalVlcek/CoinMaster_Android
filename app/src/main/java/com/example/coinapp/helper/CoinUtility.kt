@@ -31,8 +31,8 @@ object CoinUtility {
      * Counts current value of held coins
      * Formula: Sum of all holdings * current price of coin
      */
-    fun countHoldingsValue(transactions: List<Transaction>, coin: Coin?): Double {
-        return countHoldings(transactions) * (coin?.price ?: 0.0)
+    fun countHoldingsValue(transactions: List<Transaction>, coinPrice: Double): Double {
+        return countHoldings(transactions) * coinPrice
     }
 
     /**
@@ -69,7 +69,7 @@ object CoinUtility {
      * Formula: Current holdings value - Total cost
      */
     fun countProfitOrLoss(transactions: List<Transaction>, coin: Coin): Double {
-        return countHoldingsValue(transactions, coin) - countTotalCost(transactions)
+        return countHoldingsValue(transactions, coin.price) - countTotalCost(transactions)
     }
 
     /**
@@ -81,7 +81,7 @@ object CoinUtility {
         if (totalCost == 0.0) {
             return 0.0
         }
-        return (countHoldingsValue(transactions, coin) / totalCost) - 1
+        return (countHoldingsValue(transactions, coin.price) / totalCost) - 1
     }
 
     /**

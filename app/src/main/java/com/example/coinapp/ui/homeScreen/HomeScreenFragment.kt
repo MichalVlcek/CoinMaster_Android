@@ -131,8 +131,35 @@ class HomeScreenFragment : Fragment() {
             coins?.map { coin ->
                 CoinUtility.countHoldingsValue(transactions?.filter { t ->
                     t.coinId == coin.id
-                } ?: emptyList(), coin)
-            }?.sum()
-        binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings ?: 0.0)
+                } ?: emptyList(), coin.price)
+            }?.sum() ?: 0.0
+        binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings)
+
+        //TODO finish this method when the CoinGecko wrapper is fixed
+//        lifecycleScope.launch {
+//            //TODO handle exception
+//
+//            val request = lifecycleScope.async(Dispatchers.IO) {
+//                return@async coins?.map { coin ->
+//                    CoinUtility.countHoldingsValue(transactions?.filter { t ->
+//                        t.coinId == coin.id
+//                    } ?: emptyList(),
+//                        ApiService.getInstance()
+//                            .getHistoricalCoinPrice(coin.id, LocalDate.now().minusDays(7)))
+//                }?.sum() ?: 0.0
+//            }
+//
+//            val holdingsBefore = request.await()
+//
+//            binding.changeValue.setTextAndColor(
+//                StringOperations.formatCurrency(totalHoldings - holdingsBefore),
+//                totalHoldings - holdingsBefore
+//            )
+//
+//            binding.changePercentage.setTextAndColor(
+//                StringOperations.formatPercentage((totalHoldings / holdingsBefore / 100) - 1),
+//                (totalHoldings / holdingsBefore / 100) - 1
+//            )
+//        }
     }
 }

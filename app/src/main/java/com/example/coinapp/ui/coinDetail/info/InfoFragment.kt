@@ -67,7 +67,12 @@ class InfoFragment : Fragment() {
             binding.holdings.text =
                 StringOperations.formatCurrency(CoinUtility.countHoldings(transactions), coin)
             binding.value.text =
-                StringOperations.formatCurrency(CoinUtility.countHoldingsValue(transactions, coin))
+                StringOperations.formatCurrency(
+                    CoinUtility.countHoldingsValue(
+                        transactions,
+                        coin.price
+                    )
+                )
             binding.buyPrice.text =
                 StringOperations.formatCurrency(CoinUtility.countAverageTransactionCost(transactions))
             binding.deposit.text =

@@ -29,7 +29,7 @@ class HomeScreenAdapter(
             field = value.sortedByDescending { coin ->
                 CoinUtility.countHoldingsValue(
                     transactions.filter { transaction -> transaction.coinId == coin.id },
-                    coin
+                    coin.price
                 )
             }
             notifyDataSetChanged()
@@ -61,7 +61,7 @@ class HomeScreenAdapter(
             holdings.text = StringOperations.formatCurrency(
                 CoinUtility.countHoldingsValue(
                     filteredTransactions,
-                    coin
+                    coin.price
                 )
             )
 
