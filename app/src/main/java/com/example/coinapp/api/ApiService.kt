@@ -2,6 +2,8 @@ package com.example.coinapp.api
 
 import com.example.coinapp.data.Coin
 import drewcarlson.coingecko.CoinGeckoClient
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 const val currency = "usd"
 const val page = 1
@@ -19,6 +21,15 @@ class ApiService {
             }
             return instance!!
         }
+    }
+
+    suspend fun getHistoricalCoinPrice(coinId: String, date: LocalDate): Double {
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        return coinGecko.getCoinHistoryById(
+            id = coinId,
+            localization = false,
+            date = date.format(formatter),
+        ).marketData?.currentPrice?.get(currency) ?: 0.0
     }
 
     /**
