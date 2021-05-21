@@ -5,12 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.coinapp.api.ApiService
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.CoinRepository
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 class HomeScreenViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -41,6 +44,15 @@ class HomeScreenViewModel(application: Application) : AndroidViewModel(applicati
     fun updateCoins() {
         viewModelScope.launch(Dispatchers.IO) {
             _coins.postValue(coinRepository.loadCoins())
+        }
+    }
+
+    suspend fun getHistoricalPrices(date: LocalDate): Map<String, Double> {
+        return withContext(Dispatchers.IO) {
+            coins.value?.associateBy(
+                { it.id },
+                { ApiService.getInstance().getHistoricalCoinPrice(it.id, date) })
+                ?: emptyMap()
         }
     }
 

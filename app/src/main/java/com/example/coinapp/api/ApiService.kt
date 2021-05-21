@@ -24,12 +24,17 @@ class ApiService {
     }
 
     suspend fun getHistoricalCoinPrice(coinId: String, date: LocalDate): Double {
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        return coinGecko.getCoinHistoryById(
-            id = coinId,
-            localization = false,
-            date = date.format(formatter),
-        ).marketData?.currentPrice?.get(currency) ?: 0.0
+        try {
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            return coinGecko.getCoinHistoryById(
+                id = coinId,
+                localization = false,
+                date = date.format(formatter),
+            ).marketData?.currentPrice?.get(currency) ?: 0.0
+        } catch (e: Exception) {
+
+        }
+        return 0.0
     }
 
     /**

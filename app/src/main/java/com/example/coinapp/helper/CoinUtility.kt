@@ -4,6 +4,7 @@ import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionType
+import java.time.LocalDate
 
 object CoinUtility {
     /**
@@ -33,6 +34,28 @@ object CoinUtility {
      */
     fun countHoldingsValue(transactions: List<Transaction>, coinPrice: Double): Double {
         return countHoldings(transactions) * coinPrice
+    }
+
+    fun countHoldingsValue(transactions: List<Transaction>, coins: List<Coin>): Double {
+        return coins.map { coin ->
+            countHoldingsValue(
+                transactions.filter { t -> t.coinId == coin.id },
+                coin.price
+            )
+        }.sum()
+    }
+
+    fun countHoldingsValueHistorical(
+        transactions: List<Transaction>,
+        coinPrices: Map<String, Double>,
+        date: LocalDate
+    ): Double {
+        return coinPrices.map { (id, price) ->
+            countHoldingsValue(
+                transactions.filter { t -> t.coinId == id && t.date <= date },
+                price
+            )
+        }.sum()
     }
 
     /**
