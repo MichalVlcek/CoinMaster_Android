@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinApp">
         <activity
+            android:name=".RegisterActivity"
+            android:label="@string/sign_up">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".TransactionManageActivity"
             android:parentActivityName=".HomeScreenActivity" />
         <activity
@@ -24,13 +33,7 @@
             android:parentActivityName=".HomeScreenActivity" />
         <activity
             android:name=".HomeScreenActivity"
-            android:label="@string/title_activity_home_screen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_home_screen" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".HomeScreenActivity" />

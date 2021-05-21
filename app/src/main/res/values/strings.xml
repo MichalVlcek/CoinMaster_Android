@@ -63,6 +63,12 @@
     <string name="_30d">30d</string>
     <string name="_90d">90d</string>
     <string name="_1y">1y</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="example_email">example@email.com</string>
+    <string name="password">Password</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="sign_in">Sign In</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">

@@ -8,14 +8,17 @@ import androidx.room.TypeConverters
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.DataTypeConverters
 import com.example.coinapp.data.Transaction
+import com.example.coinapp.data.User
 
-@Database(entities = [Coin::class, Transaction::class], version = 1)
+@Database(entities = [Coin::class, Transaction::class, User::class], version = 1)
 @TypeConverters(DataTypeConverters::class)
 abstract class CoinDatabase : RoomDatabase() {
 
     abstract fun coinDao(): CoinDao
 
     abstract fun transactionDao(): TransactionDao
+
+    abstract fun userDao(): UserDao
 
     companion object {
         private var instance: CoinDatabase? = null
