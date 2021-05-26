@@ -8,6 +8,9 @@ import com.example.coinapp.data.User
 
 @Dao
 interface UserDao {
+    @Query("SELECT * FROM user WHERE email = :email")
+    suspend fun loadByEmail(email: String): User?
+
     @Query("SELECT * FROM user WHERE id = :id")
     suspend fun loadById(id: Int): User
 
