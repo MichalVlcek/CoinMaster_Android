@@ -10,7 +10,7 @@ import com.example.coinapp.data.DataTypeConverters
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.User
 
-@Database(entities = [Coin::class, Transaction::class, User::class], version = 1)
+@Database(entities = [Coin::class, Transaction::class, User::class], version = 2)
 @TypeConverters(DataTypeConverters::class)
 abstract class CoinDatabase : RoomDatabase() {
 
