@@ -1,5 +1,6 @@
 package com.example.coinapp.ui.homeScreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.AddCoinActivity
 import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.CoinDetailActivity.Companion.COIN
+import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
@@ -135,19 +137,18 @@ class HomeScreenFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun dateByPickedInterval(group: RadioGroup): LocalDate {
-        return LocalDate.now().minusDays(
-            when (group.checkedRadioButtonId) {
-                binding.radio1d.id -> 1
-                binding.radio7d.id -> 7
-                binding.radio30d.id -> 30
-                binding.radio90d.id -> 90
-                binding.radio1y.id -> 365
-                else -> 0
-            }
-        )
+    private fun intervalFromGroup(group: RadioGroup): Long {
+        return when (group.checkedRadioButtonId) {
+            binding.radio1d.id -> 1
+            binding.radio7d.id -> 7
+            binding.radio30d.id -> 30
+            binding.radio90d.id -> 90
+            binding.radio1y.id -> 365
+            else -> 0
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindDataToOverview(
         transactionsNullable: List<Transaction>?,
         coinsNullable: List<Coin>?
@@ -155,9 +156,14 @@ class HomeScreenFragment : Fragment() {
         val transactions = transactionsNullable ?: emptyList()
         val coins = coinsNullable ?: emptyList()
         val totalHoldings = CoinUtility.countHoldingsValue(transactions, coins)
-        val compareDate = dateByPickedInterval(binding.intervalButtonGroup)
+        val interval = intervalFromGroup(binding.intervalButtonGroup)
+        val compareDate = LocalDate.now().minusDays(interval)
 
+        // set text to text views
         binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings)
+        binding.changeHeading.text = "$interval ${getString(R.string.change_heading)}"
+        binding.highHeading.text = "$interval ${getString(R.string.high_heading)}"
+        binding.lowHeading.text = "$interval ${getString(R.string.low_heading)}"
 
         lifecycleScope.launch {
 
