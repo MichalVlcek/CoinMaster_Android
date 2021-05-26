@@ -8,7 +8,7 @@ import com.example.coinapp.data.User
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM coin WHERE id = :id")
+    @Query("SELECT * FROM user WHERE id = :id")
     fun loadById(id: Int): User
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
