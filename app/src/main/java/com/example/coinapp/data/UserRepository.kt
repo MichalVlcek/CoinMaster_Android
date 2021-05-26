@@ -2,6 +2,7 @@ package com.example.coinapp.data
 
 import android.content.Context
 import com.example.coinapp.db.CoinDatabase
+import com.example.coinapp.ui.register.UserExistsException
 
 class UserRepository(context: Context) {
     companion object {
@@ -15,6 +16,12 @@ class UserRepository(context: Context) {
         }
     }
 
-    private val transactionDao = CoinDatabase.getInstance(context).transactionDao()
+    private val userDao = CoinDatabase.getInstance(context).userDao()
 
+    suspend fun registerUser(user: User) {
+        if (userDao.loadByEmail(user.email) != null) {
+            throw UserExistsException("This user already exists")
+        }
+        userDao.insertAll(user)
+    }
 }

@@ -19,9 +19,9 @@ import com.example.coinapp.R
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
-import com.example.coinapp.helper.CoinUtility
-import com.example.coinapp.helper.StringOperations
-import com.example.coinapp.helper.TextViewOperations.setTextAndColor
+import com.example.coinapp.utils.CoinUtility
+import com.example.coinapp.utils.StringOperations
+import com.example.coinapp.utils.TextViewOperations.setTextAndColor
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
