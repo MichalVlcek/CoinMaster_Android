@@ -1,11 +1,14 @@
 package com.example.coinapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // At the moment doesn't do anything
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.coinapp.ui.register
+package com.example.coinapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,20 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.coinapp.HomeScreenActivity
-import com.example.coinapp.LoginActivity
-import com.example.coinapp.databinding.RegisterFragmentBinding
+import com.example.coinapp.RegisterActivity
+import com.example.coinapp.databinding.LoginFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
-class RegisterFragment : Fragment() {
-
+class LoginFragment : Fragment() {
     companion object {
-        fun newInstance() = RegisterFragment()
+        fun newInstance() = LoginFragment()
     }
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: LoginViewModel
 
-    private var _binding: RegisterFragmentBinding? = null
+    private var _binding: LoginFragmentBinding? = null
     private val binding
         get() = _binding!!
 
@@ -31,29 +30,28 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = RegisterFragmentBinding.inflate(inflater, container, false)
+        _binding = LoginFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        viewModel.registeredUser.observe(
+        viewModel.signedUser.observe(
             viewLifecycleOwner,
             {
                 signIn()
             }
         )
 
-        binding.signUpButton.setOnClickListener { registerUser() }
-        binding.signUpSwitch.setOnClickListener { switchToLogin() }
+        binding.signInButton.setOnClickListener { login() }
+        binding.signUpSwitch.setOnClickListener { switchToRegister() }
     }
 
-    private fun registerUser() {
+    private fun login() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
-        val premium = binding.userTypeCheckbox.isChecked
 
         // Error check
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password.isEmpty()) {
@@ -69,33 +67,33 @@ class RegisterFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
-                viewModel.registerUser(email, password, premium)
-            } catch (e: UserExistsException) {
+                viewModel.loginUser(email, password)
+            } catch (e: WrongCredentialsException) {
                 Snackbar.make(
                     requireContext(),
                     requireView(),
-                    "User with this email already exists!",
+                    "You typed wrong credentials, either email or password is wrong!",
                     4000
                 ).show()
             } catch (e: Exception) {
                 Snackbar.make(
                     requireContext(),
                     requireView(),
-                    "Registration unexpectedly failed!",
+                    "Signing up unexpectedly failed!",
                     4000
                 ).show()
             }
         }
     }
 
-    private fun signIn() {
-        //TODO pridat user ID
-        val intent = Intent(requireContext(), HomeScreenActivity()::class.java)
+    private fun switchToRegister() {
+        val intent = Intent(requireContext(), RegisterActivity::class.java)
         startActivity(intent)
     }
 
-    private fun switchToLogin() {
-        val intent = Intent(requireContext(), LoginActivity::class.java)
+    private fun signIn() {
+        //TODO pridat user ID
+        val intent = Intent(requireContext(), HomeScreenActivity()::class.java)
         startActivity(intent)
     }
 

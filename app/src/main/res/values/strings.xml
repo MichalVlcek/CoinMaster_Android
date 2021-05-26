@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoinApp</string>
+    <string name="app_name">Coin Master</string>
     <string name="title_activity_home_screen">CoinApp</string>
     <string name="coin_name_placeholder">COIN</string>
     <string name="price_placeholder">60 000$</string>
@@ -70,6 +70,7 @@
     <string name="have_an_account">Have an account?</string>
     <string name="sign_in">Sign In</string>
     <string name="are_you_premium">Are you Premium User?</string>
+    <string name="no_account">No account?</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">
