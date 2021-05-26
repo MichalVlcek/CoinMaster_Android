@@ -69,6 +69,7 @@
     <string name="password">Password</string>
     <string name="have_an_account">Have an account?</string>
     <string name="sign_in">Sign In</string>
+    <string name="are_you_premium">Are you Premium User?</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">

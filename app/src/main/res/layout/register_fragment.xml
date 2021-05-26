@@ -8,7 +8,7 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/sign_up_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
@@ -19,16 +19,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/email_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
         style="@style/HeadingTextView"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/email_edit_text"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/email_edit_text"
         style="@style/PrettyEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -37,21 +37,21 @@
         android:hint="@string/example_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_heading"
         android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/password_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
         style="@style/HeadingTextView"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/password_edit_text"
         style="@style/PrettyEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -59,12 +59,23 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/email_edit_text"
         android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
+    <CheckBox
+        android:id="@+id/user_type_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/are_you_premium"
+        style="@style/HeadingTextView"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sign_up_button"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="64dp"
@@ -72,22 +83,22 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/have_account_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="@string/have_an_account"
         style="@style/HeadingTextView"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/sign_up_switch"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:text="@string/sign_in"
