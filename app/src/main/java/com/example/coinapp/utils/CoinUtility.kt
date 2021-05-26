@@ -1,9 +1,10 @@
-package com.example.coinapp.helper
+package com.example.coinapp.utils
 
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.data.TransactionType
+import java.time.LocalDate
 
 object CoinUtility {
     /**
@@ -31,8 +32,30 @@ object CoinUtility {
      * Counts current value of held coins
      * Formula: Sum of all holdings * current price of coin
      */
-    fun countHoldingsValue(transactions: List<Transaction>, coin: Coin?): Double {
-        return countHoldings(transactions) * (coin?.price ?: 0.0)
+    fun countHoldingsValue(transactions: List<Transaction>, coinPrice: Double): Double {
+        return countHoldings(transactions) * coinPrice
+    }
+
+    fun countHoldingsValue(transactions: List<Transaction>, coins: List<Coin>): Double {
+        return coins.map { coin ->
+            countHoldingsValue(
+                transactions.filter { t -> t.coinId == coin.id },
+                coin.price
+            )
+        }.sum()
+    }
+
+    fun countHoldingsValueHistorical(
+        transactions: List<Transaction>,
+        coinPrices: Map<String, Double>,
+        date: LocalDate
+    ): Double {
+        return coinPrices.map { (id, price) ->
+            countHoldingsValue(
+                transactions.filter { t -> t.coinId == id && t.date <= date },
+                price
+            )
+        }.sum()
     }
 
     /**
@@ -69,7 +92,7 @@ object CoinUtility {
      * Formula: Current holdings value - Total cost
      */
     fun countProfitOrLoss(transactions: List<Transaction>, coin: Coin): Double {
-        return countHoldingsValue(transactions, coin) - countTotalCost(transactions)
+        return countHoldingsValue(transactions, coin.price) - countTotalCost(transactions)
     }
 
     /**
@@ -81,7 +104,7 @@ object CoinUtility {
         if (totalCost == 0.0) {
             return 0.0
         }
-        return (countHoldingsValue(transactions, coin) / totalCost) - 1
+        return (countHoldingsValue(transactions, coin.price) / totalCost) - 1
     }
 
     /**

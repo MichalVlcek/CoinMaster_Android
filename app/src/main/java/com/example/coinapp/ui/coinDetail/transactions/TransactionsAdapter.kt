@@ -9,8 +9,8 @@ import com.example.coinapp.data.Coin
 import com.example.coinapp.data.FeeType
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionsItemBinding
-import com.example.coinapp.helper.StringOperations
-import com.example.coinapp.helper.TextViewOperations.setTextAndColor
+import com.example.coinapp.utils.StringOperations
+import com.example.coinapp.utils.TextViewOperations.setTextAndColor
 
 class TransactionsAdapter(
     private val switcher: ViewSwitcher,

@@ -1,4 +1,4 @@
-package com.example.coinapp.helper
+package com.example.coinapp.utils
 
 import com.example.coinapp.data.Coin
 import java.text.NumberFormat

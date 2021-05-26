@@ -11,10 +11,10 @@ import com.example.coinapp.TransactionManageActivity
 import com.example.coinapp.data.Coin
 import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
-import com.example.coinapp.helper.CoinUtility
-import com.example.coinapp.helper.StringOperations
-import com.example.coinapp.helper.TextViewOperations.setTextAndColor
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
+import com.example.coinapp.utils.CoinUtility
+import com.example.coinapp.utils.StringOperations
+import com.example.coinapp.utils.TextViewOperations.setTextAndColor
 
 class InfoFragment : Fragment() {
 
@@ -67,7 +67,12 @@ class InfoFragment : Fragment() {
             binding.holdings.text =
                 StringOperations.formatCurrency(CoinUtility.countHoldings(transactions), coin)
             binding.value.text =
-                StringOperations.formatCurrency(CoinUtility.countHoldingsValue(transactions, coin))
+                StringOperations.formatCurrency(
+                    CoinUtility.countHoldingsValue(
+                        transactions,
+                        coin.price
+                    )
+                )
             binding.buyPrice.text =
                 StringOperations.formatCurrency(CoinUtility.countAverageTransactionCost(transactions))
             binding.deposit.text =
