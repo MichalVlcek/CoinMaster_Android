@@ -2,6 +2,7 @@ package com.example.coinapp.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.coinapp.model.Coin
 import com.example.coinapp.model.User
@@ -9,7 +10,7 @@ import com.example.coinapp.model.UserCoinDataJoin
 
 @Dao
 interface UserCoinJoinDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(userCoinJoin: UserCoinDataJoin)
 
     @Query("DELETE FROM user_coin_join WHERE user_coin_join.userId=:userId AND user_coin_join.coinId=:coinId")
