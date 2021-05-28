@@ -71,6 +71,7 @@
     <string name="sign_in">Sign In</string>
     <string name="are_you_premium">Are you Premium User?</string>
     <string name="no_account">No account?</string>
+    <string name="logout">logout</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">
