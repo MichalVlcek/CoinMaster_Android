@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.coinapp.HomeScreenActivity
 import com.example.coinapp.LoginActivity
 import com.example.coinapp.databinding.RegisterFragmentBinding
+import com.example.coinapp.exceptions.UserExistsException
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 

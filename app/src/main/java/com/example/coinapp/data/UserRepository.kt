@@ -2,8 +2,8 @@ package com.example.coinapp.data
 
 import android.content.Context
 import com.example.coinapp.db.CoinDatabase
-import com.example.coinapp.ui.login.WrongCredentialsException
-import com.example.coinapp.ui.register.UserExistsException
+import com.example.coinapp.exceptions.UserExistsException
+import com.example.coinapp.exceptions.WrongCredentialsException
 import com.example.coinapp.utils.UserUtils
 
 class UserRepository(context: Context) {
