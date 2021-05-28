@@ -1,5 +1,6 @@
 package com.example.coinapp.ui.register
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.coinapp.HomeScreenActivity
 import com.example.coinapp.LoginActivity
+import com.example.coinapp.MainActivity
+import com.example.coinapp.MainActivity.Companion.LOGIN
+import com.example.coinapp.data.User
 import com.example.coinapp.databinding.RegisterFragmentBinding
 import com.example.coinapp.exceptions.UserExistsException
 import com.google.android.material.snackbar.Snackbar
@@ -43,6 +47,7 @@ class RegisterFragment : Fragment() {
         viewModel.registeredUser.observe(
             viewLifecycleOwner,
             {
+                storeUserToPreferences(it)
                 signIn()
             }
         )
@@ -89,8 +94,12 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    private fun storeUserToPreferences(user: User) {
+        val sharedPreferences = requireActivity().getSharedPreferences(LOGIN, MODE_PRIVATE)
+        sharedPreferences.edit().putLong(MainActivity.USER_ID, user.id).apply()
+    }
+
     private fun signIn() {
-        //TODO pridat user ID
         val intent = Intent(requireContext(), HomeScreenActivity()::class.java)
         startActivity(intent)
     }

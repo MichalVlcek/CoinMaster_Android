@@ -26,7 +26,8 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                 premium = premium
             )
             userRepository.registerUser(user)
-            _registeredUser.postValue(user)
+            // Retrieving user from database, because I need to get newly generated id
+            _registeredUser.postValue(userRepository.retrieveUser(email, password))
         }
 
         return request.await()
