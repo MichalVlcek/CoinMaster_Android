@@ -21,6 +21,6 @@ import androidx.room.ForeignKey
         )]
 )
 data class UserCoinDataJoin(
-    var userId: Int = 0,
+    var userId: Long = 0,
     var coinId: String = ""
 )
