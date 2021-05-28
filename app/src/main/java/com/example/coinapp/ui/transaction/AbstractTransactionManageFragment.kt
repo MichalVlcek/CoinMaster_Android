@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coinapp.TransactionManageActivity
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.FeeType
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionType
 import com.example.coinapp.databinding.TransactionFormFragmentBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.enums.FeeType
+import com.example.coinapp.model.enums.TransactionType
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.time.LocalDate

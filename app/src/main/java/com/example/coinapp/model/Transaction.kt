@@ -1,9 +1,11 @@
-package com.example.coinapp.data
+package com.example.coinapp.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.coinapp.model.enums.FeeType
+import com.example.coinapp.model.enums.TransactionType
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 

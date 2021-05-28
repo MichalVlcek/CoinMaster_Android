@@ -13,9 +13,9 @@ import com.example.coinapp.HomeScreenActivity
 import com.example.coinapp.LoginActivity
 import com.example.coinapp.MainActivity
 import com.example.coinapp.MainActivity.Companion.LOGIN
-import com.example.coinapp.data.User
 import com.example.coinapp.databinding.RegisterFragmentBinding
 import com.example.coinapp.exceptions.UserExistsException
+import com.example.coinapp.model.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 

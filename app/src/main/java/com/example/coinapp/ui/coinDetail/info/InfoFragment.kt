@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.TransactionManageActivity
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.CoinDetailInfoFragmentBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 import com.example.coinapp.utils.CoinUtility
 import com.example.coinapp.utils.StringOperations

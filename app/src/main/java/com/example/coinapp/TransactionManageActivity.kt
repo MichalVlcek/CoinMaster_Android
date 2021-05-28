@@ -2,8 +2,8 @@ package com.example.coinapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import com.example.coinapp.ui.transaction.TransactionCreateFragment
 import com.example.coinapp.ui.transaction.TransactionEditFragment
 
@@ -19,7 +19,7 @@ class TransactionManageActivity : AppCompatActivity() {
         val transaction = intent.extras?.getParcelable<Transaction>(TRANSACTION)
 
         supportActionBar?.title = coin?.name
-        
+
         if (savedInstanceState == null) {
             if (transaction == null) {
                 supportFragmentManager.beginTransaction()

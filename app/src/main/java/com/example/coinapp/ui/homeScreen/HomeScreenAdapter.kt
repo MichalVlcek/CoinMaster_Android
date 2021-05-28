@@ -6,9 +6,9 @@ import android.widget.ViewSwitcher
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.coinapp.R
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeWatchedCoinItemBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import com.example.coinapp.utils.CoinUtility
 import com.example.coinapp.utils.StringOperations
 

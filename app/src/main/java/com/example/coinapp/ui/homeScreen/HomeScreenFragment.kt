@@ -16,9 +16,9 @@ import com.example.coinapp.AddCoinActivity
 import com.example.coinapp.CoinDetailActivity
 import com.example.coinapp.CoinDetailActivity.Companion.COIN
 import com.example.coinapp.R
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.HomeScreenFragmentBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import com.example.coinapp.utils.CoinUtility
 import com.example.coinapp.utils.StringOperations
 import com.example.coinapp.utils.TextViewOperations.setTextAndColor

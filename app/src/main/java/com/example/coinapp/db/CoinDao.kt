@@ -1,7 +1,7 @@
 package com.example.coinapp.db
 
 import androidx.room.*
-import com.example.coinapp.data.Coin
+import com.example.coinapp.model.Coin
 
 @Dao
 interface CoinDao {

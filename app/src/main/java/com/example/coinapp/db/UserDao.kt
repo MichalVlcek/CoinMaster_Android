@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.coinapp.data.User
+import com.example.coinapp.model.User
 
 @Dao
 interface UserDao {

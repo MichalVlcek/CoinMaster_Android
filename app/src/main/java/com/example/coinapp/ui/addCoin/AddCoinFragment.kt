@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coinapp.data.Coin
 import com.example.coinapp.databinding.AddCoinFragmentBinding
+import com.example.coinapp.model.Coin
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 

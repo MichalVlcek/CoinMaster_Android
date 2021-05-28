@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.R
 import com.example.coinapp.TransactionManageActivity
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionCreateFragmentBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import java.time.LocalDate
 
 class TransactionCreateFragment : AbstractTransactionManageFragment() {

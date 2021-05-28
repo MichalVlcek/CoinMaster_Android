@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.coinapp.data.Coin
 import com.example.coinapp.data.DataTypeConverters
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.User
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.User
 
 @Database(entities = [Coin::class, Transaction::class, User::class], version = 2)
 @TypeConverters(DataTypeConverters::class)

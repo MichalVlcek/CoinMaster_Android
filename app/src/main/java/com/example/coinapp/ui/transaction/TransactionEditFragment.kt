@@ -8,11 +8,11 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinapp.R
 import com.example.coinapp.TransactionManageActivity
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionType
 import com.example.coinapp.databinding.TransactionEditFragmentBinding
 import com.example.coinapp.databinding.TransactionFormFragmentBinding
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.enums.TransactionType
 
 class TransactionEditFragment : AbstractTransactionManageFragment() {
 

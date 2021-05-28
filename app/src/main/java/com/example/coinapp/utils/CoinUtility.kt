@@ -1,9 +1,9 @@
 package com.example.coinapp.utils
 
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.FeeType
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionType
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.enums.FeeType
+import com.example.coinapp.model.enums.TransactionType
 import java.time.LocalDate
 
 object CoinUtility {

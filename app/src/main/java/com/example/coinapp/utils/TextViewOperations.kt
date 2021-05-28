@@ -3,7 +3,7 @@ package com.example.coinapp.utils
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import com.example.coinapp.R
-import com.example.coinapp.data.TransactionType
+import com.example.coinapp.model.enums.TransactionType
 
 
 object TextViewOperations {

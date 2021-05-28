@@ -13,9 +13,9 @@ import com.example.coinapp.HomeScreenActivity
 import com.example.coinapp.MainActivity.Companion.LOGIN
 import com.example.coinapp.MainActivity.Companion.USER_ID
 import com.example.coinapp.RegisterActivity
-import com.example.coinapp.data.User
 import com.example.coinapp.databinding.LoginFragmentBinding
 import com.example.coinapp.exceptions.WrongCredentialsException
+import com.example.coinapp.model.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
