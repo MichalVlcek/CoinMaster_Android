@@ -12,7 +12,7 @@ interface UserDao {
     suspend fun loadByEmail(email: String): User?
 
     @Query("SELECT * FROM user WHERE id = :id")
-    suspend fun loadById(id: Int): User
+    suspend fun loadById(id: Long): User
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAll(vararg users: User)

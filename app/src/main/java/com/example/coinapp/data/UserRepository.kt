@@ -38,4 +38,8 @@ class UserRepository(context: Context) {
 
         return user
     }
+
+    suspend fun getUserById(id: Long): User {
+        return userDao.loadById(id)
+    }
 }
