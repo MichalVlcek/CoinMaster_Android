@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.api.ApiService
 import com.example.coinapp.data.Coin
-import com.example.coinapp.data.CoinRepository
 import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionRepository
+import com.example.coinapp.data.repositories.CoinRepository
+import com.example.coinapp.data.repositories.TransactionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

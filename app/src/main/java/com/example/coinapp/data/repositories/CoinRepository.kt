@@ -1,8 +1,9 @@
-package com.example.coinapp.data
+package com.example.coinapp.data.repositories
 
 import android.content.Context
 import androidx.annotation.WorkerThread
 import com.example.coinapp.api.ApiService
+import com.example.coinapp.data.Coin
 import com.example.coinapp.db.CoinDatabase
 
 class CoinRepository private constructor(context: Context) {

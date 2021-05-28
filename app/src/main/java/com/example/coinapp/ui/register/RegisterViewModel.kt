@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.data.User
-import com.example.coinapp.data.UserRepository
+import com.example.coinapp.data.repositories.UserRepository
 import com.example.coinapp.utils.UserUtils
 import kotlinx.coroutines.async
 
