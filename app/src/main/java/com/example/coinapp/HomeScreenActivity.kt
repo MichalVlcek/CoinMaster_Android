@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.coinapp.ui.homeScreen.HomeScreenFragment
+import com.example.coinapp.utils.UserUtils
 
 class HomeScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +35,7 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        val sharedPreferences = getSharedPreferences(MainActivity.LOGIN, MODE_PRIVATE)
-        sharedPreferences.edit().putLong(MainActivity.USER_ID, 0).apply()
+        UserUtils.logoutUser(this)
 
         val intent = Intent(this, LoginActivity()::class.java)
         startActivity(intent)
