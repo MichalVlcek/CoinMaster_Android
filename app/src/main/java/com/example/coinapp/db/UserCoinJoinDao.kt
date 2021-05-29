@@ -21,4 +21,7 @@ interface UserCoinJoinDao {
 
     @Query("SELECT * FROM coin INNER JOIN user_coin_join ON coin.id = user_coin_join.coinId WHERE user_coin_join.userId =:userId")
     suspend fun getCoinsForUser(userId: Long): List<Coin>
+
+    @Query("SELECT COUNT(*) FROM user_coin_join WHERE userId =:userId")
+    suspend fun countCoinsForUser(userId: Long): Int
 }

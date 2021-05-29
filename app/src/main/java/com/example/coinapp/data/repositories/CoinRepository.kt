@@ -3,7 +3,9 @@ package com.example.coinapp.data.repositories
 import android.content.Context
 import androidx.annotation.WorkerThread
 import com.example.coinapp.api.ApiService
+import com.example.coinapp.data.ConfigValues
 import com.example.coinapp.db.CoinDatabase
+import com.example.coinapp.exceptions.MaximumCoinsException
 import com.example.coinapp.model.Coin
 import com.example.coinapp.model.UserCoinDataJoin
 import com.example.coinapp.utils.UserUtils
@@ -24,10 +26,16 @@ class CoinRepository private constructor(context: Context) {
     }
 
     private val coinDao = CoinDatabase.getInstance(context).coinDao()
+    private val userDao = CoinDatabase.getInstance(context).userDao()
     private val userCoinJoinDao = CoinDatabase.getInstance(context).userCoinJoinDao()
 
     @WorkerThread
     suspend fun insertCoin(coin: Coin) {
+        val user = userDao.loadById(loggedUserId)
+        if (!user.premium && countCoinsForUser() >= ConfigValues.BASiC_USER_MAX_COINS) {
+            throw MaximumCoinsException("Maximum threshold for coins would be exceeded")
+        }
+
         coinDao.insertAll(coin)
         userCoinJoinDao.insert(UserCoinDataJoin(loggedUserId, coin.id))
     }
@@ -59,5 +67,10 @@ class CoinRepository private constructor(context: Context) {
         }
 
         return coins
+    }
+
+    @WorkerThread
+    suspend fun countCoinsForUser(): Int {
+        return userCoinJoinDao.countCoinsForUser(loggedUserId)
     }
 }

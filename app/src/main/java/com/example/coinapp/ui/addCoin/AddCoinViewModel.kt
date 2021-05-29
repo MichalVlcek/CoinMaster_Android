@@ -1,19 +1,21 @@
 package com.example.coinapp.ui.addCoin
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.coinapp.api.ApiService
 import com.example.coinapp.data.repositories.CoinRepository
+import com.example.coinapp.data.repositories.UserRepository
 import com.example.coinapp.model.Coin
+import com.example.coinapp.model.User
+import com.example.coinapp.utils.UserUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class AddCoinViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository by lazy { CoinRepository.getInstance(application) }
+    private val coinRepository by lazy { CoinRepository.getInstance(application) }
+    private val userRepository by lazy { UserRepository.getInstance(application) }
 
     private val _items = MutableLiveData<List<Coin>>().apply {
         value = emptyList()
@@ -21,6 +23,39 @@ class AddCoinViewModel(application: Application) : AndroidViewModel(application)
 
     val items: LiveData<List<Coin>>
         get() = _items
+
+    private val _coinCount = MutableLiveData<Int>().apply {
+        viewModelScope.launch {
+            postValue(coinRepository.countCoinsForUser())
+        }
+    }
+
+    private val _loggedUser = MutableLiveData<User>().apply {
+        viewModelScope.launch {
+            postValue(userRepository.getUserById(UserUtils.getLoggedUserId(application)))
+        }
+    }
+
+    val coinCountAndLoggedUserLiveData = MediatorLiveData<Pair<Int, User>>().apply {
+        var coinCount: Int? = null
+        var loggedUser: User? = null
+
+        fun update() {
+            val localCoinCount = coinCount
+            val localLoggedUser = loggedUser
+            if (localCoinCount != null && localLoggedUser != null)
+                this.value = Pair(localCoinCount, localLoggedUser)
+        }
+
+        addSource(_coinCount) {
+            coinCount = it
+            update()
+        }
+        addSource(_loggedUser) {
+            loggedUser = it
+            update()
+        }
+    }
 
     /**
      * Clears [_items]
@@ -34,7 +69,7 @@ class AddCoinViewModel(application: Application) : AndroidViewModel(application)
      */
     suspend fun addCoin(coin: Coin) {
         val request = viewModelScope.async(Dispatchers.IO) {
-            repository.insertCoin(coin)
+            coinRepository.insertCoin(coin)
         }
         request.await()
     }
