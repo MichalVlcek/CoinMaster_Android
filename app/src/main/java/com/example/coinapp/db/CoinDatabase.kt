@@ -13,7 +13,7 @@ import com.example.coinapp.model.UserCoinDataJoin
 
 @Database(
     entities = [Coin::class, Transaction::class, User::class, UserCoinDataJoin::class],
-    version = 2
+    version = 1
 )
 @TypeConverters(DataTypeConverters::class)
 abstract class CoinDatabase : RoomDatabase() {
@@ -36,7 +36,9 @@ abstract class CoinDatabase : RoomDatabase() {
                         context,
                         CoinDatabase::class.java,
                         "tracker"
-                    ).build()
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
             }
             return instance!!
         }

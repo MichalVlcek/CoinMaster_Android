@@ -11,13 +11,13 @@ import androidx.room.ForeignKey
             entity = User::class,
             parentColumns = ["id"],
             childColumns = ["userId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.NO_ACTION
         ),
         ForeignKey(
             entity = Coin::class,
             parentColumns = ["id"],
             childColumns = ["coinId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.NO_ACTION
         )]
 )
 data class UserCoinDataJoin(
