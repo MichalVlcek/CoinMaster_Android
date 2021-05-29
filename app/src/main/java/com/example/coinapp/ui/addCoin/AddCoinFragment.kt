@@ -37,8 +37,7 @@ class AddCoinFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(AddCoinViewModel::class.java)
 
         listAdapter = AddCoinAdapter(binding.switcher) { coin -> adapterOnClick(coin) }
