@@ -9,6 +9,7 @@ import com.example.coinapp.model.Coin
 import com.example.coinapp.model.Transaction
 import com.example.coinapp.model.enums.FeeType
 import com.example.coinapp.model.enums.TransactionType
+import com.example.coinapp.utils.UserUtils
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.time.LocalDate
@@ -18,6 +19,8 @@ abstract class AbstractTransactionManageFragment : Fragment() {
     protected var coin: Coin? = null
     protected var transaction: Transaction? = null
 
+    private var loggedUserId: Long = 0
+
     lateinit var viewModel: TransactionManageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,7 @@ abstract class AbstractTransactionManageFragment : Fragment() {
             coin = it.getParcelable(TransactionManageActivity.COIN)
             transaction = it.getParcelable(TransactionManageActivity.TRANSACTION)
         }
+        loggedUserId = UserUtils.getLoggedUserId(requireContext())
     }
 
     protected fun showDatePickerDialog(label: TextView) {
@@ -77,6 +81,7 @@ abstract class AbstractTransactionManageFragment : Fragment() {
 
             return Transaction(
                 id = transaction?.id ?: 0,
+                userId = loggedUserId,
                 coinId = coinId,
                 type = type,
                 date = date,

@@ -31,7 +31,7 @@ class HomeScreenViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getTransactions() {
         viewModelScope.launch(Dispatchers.IO) {
-            _transactions.postValue(transactionRepository.getAllTransactions())
+            _transactions.postValue(transactionRepository.getAllTransactionsForUser())
         }
     }
 

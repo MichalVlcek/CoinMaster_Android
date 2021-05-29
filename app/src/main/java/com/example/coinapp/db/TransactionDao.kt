@@ -5,11 +5,11 @@ import com.example.coinapp.model.Transaction
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * FROM `transaction` ORDER BY date(date) DESC")
-    suspend fun getAll(): List<Transaction>
+    @Query("SELECT * FROM `transaction` WHERE user_id=:userId ORDER BY date(date) DESC")
+    suspend fun getAllForUser(userId: Long): List<Transaction>
 
-    @Query("SELECT * FROM `transaction` WHERE coin_id = :coinId ORDER BY date(date) DESC")
-    suspend fun loadAllByCoin(coinId: String): List<Transaction>
+    @Query("SELECT * FROM `transaction` WHERE coin_id = :coinId AND user_id = :userId ORDER BY date(date) DESC")
+    suspend fun loadAllByCoinForUser(coinId: String, userId: Long): List<Transaction>
 
     @Query("SELECT * FROM `transaction` WHERE id IN (:ids)")
     suspend fun loadAllByIds(ids: IntArray): List<Transaction>

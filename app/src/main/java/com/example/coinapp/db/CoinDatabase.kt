@@ -13,7 +13,7 @@ import com.example.coinapp.model.UserCoinDataJoin
 
 @Database(
     entities = [Coin::class, Transaction::class, User::class, UserCoinDataJoin::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(DataTypeConverters::class)
 abstract class CoinDatabase : RoomDatabase() {
