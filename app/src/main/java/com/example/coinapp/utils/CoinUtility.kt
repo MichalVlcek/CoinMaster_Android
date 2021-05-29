@@ -108,6 +108,20 @@ object CoinUtility {
     }
 
     /**
+     * Counts the percentage difference between value of current holdings and total cost
+     * Formula: Current holdings value / Total Cost - 1
+     */
+    fun countPercentageChangeForAll(totalHoldings: Double, holdingsHistorical: Double): Double {
+        return if (totalHoldings == 0.0 && holdingsHistorical == 0.0) {
+            0.0
+        } else if (holdingsHistorical == 0.0 && totalHoldings != 0.0) {
+            1.0
+        } else {
+            (totalHoldings / holdingsHistorical) - 1
+        }
+    }
+
+    /**
      * Returns List of transactions with transaction type of [type]
      */
     private fun getTransactionsByType(

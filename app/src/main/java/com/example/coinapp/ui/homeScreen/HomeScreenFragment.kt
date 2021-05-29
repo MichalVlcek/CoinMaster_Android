@@ -82,7 +82,6 @@ class HomeScreenFragment : Fragment() {
             viewLifecycleOwner,
             {
                 listAdapter.transactions = it
-//                bindDataToOverview(it, viewModel.coins.value)
             }
         )
 
@@ -159,7 +158,7 @@ class HomeScreenFragment : Fragment() {
         val interval = intervalFromGroup(binding.intervalButtonGroup)
         val compareDate = LocalDate.now().minusDays(interval)
 
-        // set text to text views
+        // set text to text view headings
         binding.totalHoldings.text = StringOperations.formatCurrency(totalHoldings)
         binding.changeHeading.text = "$interval ${getString(R.string.change_heading)}"
         binding.highHeading.text = "$interval ${getString(R.string.high_heading)}"
@@ -179,7 +178,8 @@ class HomeScreenFragment : Fragment() {
                 valueChange
             )
 
-            val valueChangePercent = (totalHoldings / holdingsHistorical) - 1
+            val valueChangePercent =
+                CoinUtility.countPercentageChangeForAll(totalHoldings, holdingsHistorical)
             binding.changePercentage.setTextAndColor(
                 StringOperations.formatPercentage(valueChangePercent),
                 valueChangePercent
