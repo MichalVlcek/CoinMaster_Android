@@ -1,3 +1,3 @@
-package com.example.coinapp.ui.register
+package com.example.coinapp.exceptions
 
 class UserExistsException(message: String) : Exception(message)

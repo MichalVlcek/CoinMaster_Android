@@ -1,4 +1,4 @@
-package com.example.coinapp.data
+package com.example.coinapp.model
 
 import android.os.Parcelable
 import androidx.room.Entity

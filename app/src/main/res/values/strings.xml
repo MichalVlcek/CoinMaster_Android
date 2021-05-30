@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoinApp</string>
+    <string name="app_name">Coin Master</string>
     <string name="title_activity_home_screen">CoinApp</string>
     <string name="coin_name_placeholder">COIN</string>
     <string name="price_placeholder">60 000$</string>
@@ -7,14 +7,16 @@
     <string name="coin_holdings_placeholder">0.01 BTC</string>
     <string name="no_data_loaded">No data loaded</string>
     <string name="search_coin_activity_title">Add new coins</string>
-    <string name="added_coins_placeholder">Currently added: 8/10</string>
-    <string name="user_type_placeholder">You are Premium User</string>
+    <string name="added_coins">Currently added:</string>
+    <string name="user_type_prefix">You are</string>
     <string name="search">Search</string>
     <string name="rank_placeholder">#1</string>
     <string name="market_cap_placeholder">1 000 000 000$</string>
     <string name="title_activity_coin_detail">CoinDetailActivity</string>
     <string name="coin_info">Coin Info</string>
     <string name="transactions">Transactions</string>
+    <string name="premium_user">Premium User</string>
+    <string name="basic_user">Basic User</string>
 
     <!-- COIN INFO STRINGS -->
     <string name="holdings">Holdings:</string>
@@ -70,6 +72,8 @@
     <string name="have_an_account">Have an account?</string>
     <string name="sign_in">Sign In</string>
     <string name="are_you_premium">Are you Premium User?</string>
+    <string name="no_account">No account?</string>
+    <string name="logout">logout</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">

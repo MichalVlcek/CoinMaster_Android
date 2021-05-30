@@ -1,7 +1,7 @@
 package com.example.coinapp.db
 
 import androidx.room.*
-import com.example.coinapp.data.Coin
+import com.example.coinapp.model.Coin
 
 @Dao
 interface CoinDao {
@@ -16,6 +16,9 @@ interface CoinDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg coins: Coin)
+
+    @Update
+    suspend fun updateAll(vararg coins: Coin)
 
     @Delete
     suspend fun delete(coin: Coin)

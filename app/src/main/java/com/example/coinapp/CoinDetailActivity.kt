@@ -2,7 +2,7 @@ package com.example.coinapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.coinapp.data.Coin
+import com.example.coinapp.model.Coin
 import com.example.coinapp.ui.coinDetail.CoinDetailFragment
 
 class CoinDetailActivity : AppCompatActivity() {

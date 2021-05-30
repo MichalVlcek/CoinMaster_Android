@@ -11,16 +11,27 @@
         android:id="@+id/watchedCoins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/added_coins_placeholder"
+        android:text="@string/added_coins"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userTypePrefix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/user_type_prefix"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/userType"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_type_placeholder"
+        android:textStyle="bold"
+        android:text="@string/premium_user"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +44,8 @@
         android:ems="10"
         android:hint="@string/search"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:imeOptions="actionDone"
+        android:inputType="textFilter"
         style="@style/PrettyEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

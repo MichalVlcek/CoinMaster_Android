@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinapp.TransactionManageActivity
-import com.example.coinapp.data.Transaction
 import com.example.coinapp.databinding.TransactionsFragmentBinding
+import com.example.coinapp.model.Transaction
 import com.example.coinapp.ui.coinDetail.CoinDetailViewModel
 
 class TransactionsFragment : Fragment() {

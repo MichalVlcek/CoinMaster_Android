@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.coinapp.data.User
+import com.example.coinapp.model.User
 
 @Dao
 interface UserDao {
@@ -12,7 +12,7 @@ interface UserDao {
     suspend fun loadByEmail(email: String): User?
 
     @Query("SELECT * FROM user WHERE id = :id")
-    suspend fun loadById(id: Int): User
+    suspend fun loadById(id: Long): User
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAll(vararg users: User)

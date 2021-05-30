@@ -1,6 +1,6 @@
 package com.example.coinapp.api
 
-import com.example.coinapp.data.Coin
+import com.example.coinapp.model.Coin
 import drewcarlson.coingecko.CoinGeckoClient
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

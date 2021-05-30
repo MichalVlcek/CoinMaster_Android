@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
+    android:padding="@dimen/large_padding"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
     <TextView
-        android:id="@+id/have_account_label"
+        android:id="@+id/no_account_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

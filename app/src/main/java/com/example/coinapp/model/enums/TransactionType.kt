@@ -1,4 +1,4 @@
-package com.example.coinapp.data
+package com.example.coinapp.model.enums
 
 enum class TransactionType {
     BUY,

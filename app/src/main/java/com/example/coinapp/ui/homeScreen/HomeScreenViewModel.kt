@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.coinapp.api.ApiService
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.CoinRepository
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionRepository
+import com.example.coinapp.data.repositories.CoinRepository
+import com.example.coinapp.data.repositories.TransactionRepository
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,7 +31,7 @@ class HomeScreenViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getTransactions() {
         viewModelScope.launch(Dispatchers.IO) {
-            _transactions.postValue(transactionRepository.getAllTransactions())
+            _transactions.postValue(transactionRepository.getAllTransactionsForUser())
         }
     }
 

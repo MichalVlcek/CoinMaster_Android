@@ -5,12 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.coinapp.data.Coin
 import com.example.coinapp.data.DataTypeConverters
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.User
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.User
+import com.example.coinapp.model.UserCoinDataJoin
 
-@Database(entities = [Coin::class, Transaction::class, User::class], version = 2)
+@Database(
+    entities = [Coin::class, Transaction::class, User::class, UserCoinDataJoin::class],
+    version = 2
+)
 @TypeConverters(DataTypeConverters::class)
 abstract class CoinDatabase : RoomDatabase() {
 
@@ -19,6 +23,8 @@ abstract class CoinDatabase : RoomDatabase() {
     abstract fun transactionDao(): TransactionDao
 
     abstract fun userDao(): UserDao
+
+    abstract fun userCoinJoinDao(): UserCoinJoinDao
 
     companion object {
         private var instance: CoinDatabase? = null
@@ -30,7 +36,9 @@ abstract class CoinDatabase : RoomDatabase() {
                         context,
                         CoinDatabase::class.java,
                         "tracker"
-                    ).build()
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
             }
             return instance!!
         }

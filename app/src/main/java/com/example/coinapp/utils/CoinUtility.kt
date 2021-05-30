@@ -1,9 +1,9 @@
 package com.example.coinapp.utils
 
-import com.example.coinapp.data.Coin
-import com.example.coinapp.data.FeeType
-import com.example.coinapp.data.Transaction
-import com.example.coinapp.data.TransactionType
+import com.example.coinapp.model.Coin
+import com.example.coinapp.model.Transaction
+import com.example.coinapp.model.enums.FeeType
+import com.example.coinapp.model.enums.TransactionType
 import java.time.LocalDate
 
 object CoinUtility {
@@ -105,6 +105,18 @@ object CoinUtility {
             return 0.0
         }
         return (countHoldingsValue(transactions, coin.price) / totalCost) - 1
+    }
+
+    /**
+     * Counts the percentage difference between value of current holdings and total cost
+     * Formula: Current holdings value / Total Cost - 1
+     */
+    fun countPercentageChangeForAll(totalHoldings: Double, holdingsHistorical: Double): Double {
+        return if (totalHoldings == 0.0 && holdingsHistorical == 0.0) {
+            0.0
+        } else {
+            (totalHoldings / holdingsHistorical) - 1
+        }
     }
 
     /**

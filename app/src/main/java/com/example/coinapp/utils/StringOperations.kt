@@ -1,6 +1,6 @@
 package com.example.coinapp.utils
 
-import com.example.coinapp.data.Coin
+import com.example.coinapp.model.Coin
 import java.text.NumberFormat
 
 object StringOperations {

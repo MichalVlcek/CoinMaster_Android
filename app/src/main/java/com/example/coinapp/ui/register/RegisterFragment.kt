@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.coinapp.HomeScreenActivity
+import com.example.coinapp.LoginActivity
 import com.example.coinapp.databinding.RegisterFragmentBinding
+import com.example.coinapp.exceptions.UserExistsException
+import com.example.coinapp.utils.UserUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -41,11 +44,13 @@ class RegisterFragment : Fragment() {
         viewModel.registeredUser.observe(
             viewLifecycleOwner,
             {
+                UserUtils.storeLoggedUserId(it.id, requireContext())
                 signIn()
             }
         )
 
         binding.signUpButton.setOnClickListener { registerUser() }
+        binding.signUpSwitch.setOnClickListener { switchToLogin() }
     }
 
     private fun registerUser() {
@@ -87,8 +92,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun signIn() {
-        //TODO pridat user ID
         val intent = Intent(requireContext(), HomeScreenActivity()::class.java)
+        startActivity(intent)
+    }
+
+    private fun switchToLogin() {
+        val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
     }
 
