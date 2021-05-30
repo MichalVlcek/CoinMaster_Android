@@ -114,8 +114,6 @@ object CoinUtility {
     fun countPercentageChangeForAll(totalHoldings: Double, holdingsHistorical: Double): Double {
         return if (totalHoldings == 0.0 && holdingsHistorical == 0.0) {
             0.0
-        } else if (holdingsHistorical == 0.0 && totalHoldings != 0.0) {
-            1.0
         } else {
             (totalHoldings / holdingsHistorical) - 1
         }
