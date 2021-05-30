@@ -37,4 +37,13 @@
         <item name="android:textColor">@drawable/radio_flat_text_selector</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="SearchViewWhiteText" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/edittext_border</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:searchIcon">@drawable/ic_search_white</item>
+        <item name="android:searchHintIcon">@drawable/ic_search_white</item>
+        <item name="android:closeIcon">@drawable/ic_close_white</item>
+    </style>
 </resources>
