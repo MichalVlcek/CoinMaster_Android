@@ -13,6 +13,7 @@ import com.example.coinapp.utils.StringOperations
 
 class AddCoinAdapter(
     private val switcher: ViewSwitcher,
+    private val filterSwitcher: ViewSwitcher,
     private val onClick: (Coin) -> Unit
 ) : RecyclerView.Adapter<AddCoinAdapter.ViewHolder>(), FilterAdapter {
 
@@ -27,13 +28,7 @@ class AddCoinAdapter(
             field = value
             notifyDataSetChanged()
 
-            if (value.isEmpty()) {
-                if (switcher.currentView.id != R.id.loadingBar) {
-                    switcher.showNext()
-                }
-            } else if (switcher.currentView.id != R.id.watchedCoinsList) {
-                switcher.showNext()
-            }
+            handleViewSwitching(coins, value)
         }
 
     class ViewHolder(itemBinding: AddCoinItemBinding, val onClick: (Coin) -> Unit) :
@@ -83,6 +78,25 @@ class AddCoinAdapter(
             coin.name.contains(query, true) ||
                     coin.symbol.contains(query, true) ||
                     coin.rank.toString() == query
+        }
+    }
+
+    private fun handleViewSwitching(mainCoins: List<Coin>, filteredCoins: List<Coin>) {
+        if (filteredCoins.isEmpty() && mainCoins.isEmpty()) {
+            if (switcher.currentView.id != R.id.loadingBar) {
+                switcher.showNext()
+            }
+        } else if (switcher.currentView.id != R.id.watchedCoinsList) {
+            switcher.showNext()
+        }
+
+        if (filteredCoins.isEmpty() && mainCoins.isNotEmpty()) {
+            if (filterSwitcher.currentView.id != R.id.filterFailed) {
+                filterSwitcher.showNext()
+            }
+
+        } else if (filterSwitcher.currentView.id != R.id.switcher) {
+            filterSwitcher.showNext()
         }
     }
 }

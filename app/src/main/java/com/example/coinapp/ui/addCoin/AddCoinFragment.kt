@@ -46,7 +46,10 @@ class AddCoinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(AddCoinViewModel::class.java)
 
-        listAdapter = AddCoinAdapter(binding.switcher) { coin -> adapterOnClick(coin) }
+        listAdapter = AddCoinAdapter(
+            binding.switcher,
+            binding.filterSwitcher
+        ) { coin -> adapterOnClick(coin) }
 
         binding.watchedCoinsList.apply {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

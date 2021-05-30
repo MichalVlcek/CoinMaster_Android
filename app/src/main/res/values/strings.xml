@@ -74,6 +74,7 @@
     <string name="are_you_premium">Are you Premium User?</string>
     <string name="no_account">No account?</string>
     <string name="logout">logout</string>
+    <string name="no_results">No results found for specified filter.</string>
 
     <!--    ORDER MUST CORRESPOND TO TRANSACTION TYPE ENUM!!!!  -->
     <string-array name="transaction_types_array">
