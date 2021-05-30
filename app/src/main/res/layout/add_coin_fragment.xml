@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/added_coins"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/coinSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/user_type_prefix"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/coinSearch"
         app:layout_constraintEnd_toStartOf="@+id/userType"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,25 +32,20 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="@string/premium_user"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/coinSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <com.example.coinapp.utils.SearchViewFilterable
+        android:id="@+id/coinSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/search"
-        android:importantForAutofill="no"
-        android:imeOptions="actionDone"
-        android:inputType="textFilter"
-        style="@style/PrettyEditText"
+        android:queryHint="@string/search"
+        style="@style/SearchViewWhiteText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
@@ -59,28 +54,45 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toBottomOf="@+id/coinSearch">
 
         <ViewSwitcher
-            android:id="@+id/switcher"
+            android:id="@+id/filterSwitcher"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ProgressBar
-                android:id="@+id/loadingBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/filterFailed"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp" />
+                android:textAlignment="center"
+                android:text="@string/no_results"
+                android:textColor="@color/orange"
+                style="@style/HeadingTextView" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/watchedCoinsList"
+            <ViewSwitcher
+                android:id="@+id/switcher"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/loadingBar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/watchedCoinsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </ViewSwitcher>
         </ViewSwitcher>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
