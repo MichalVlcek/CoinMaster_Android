@@ -75,6 +75,8 @@ class AddCoinFragment : Fragment() {
             }
         )
 
+        binding.coinSearch.setOnQueryTextListener(listAdapter)
+
         refreshData()
     }
 
