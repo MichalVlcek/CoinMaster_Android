@@ -1,4 +1,4 @@
-package com.example.coinapp.utils
+package com.example.coinapp.components
 
 import android.content.Context
 import android.util.AttributeSet
